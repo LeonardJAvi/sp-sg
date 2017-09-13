@@ -1,0 +1,26 @@
+%tr{ id: "row-#{phase.id}" }
+	- if can? :destroy_multiple, Phase
+		%td.item-check{style:"width: 10%"}
+			= link_to "", admin_phase_path(phase), remote: true, class: "show-row"
+			%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{phase.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{phase.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+			%label{ for: "checkbox-#{phase.id}" }
+
+	%td{style:"width: 30%"}
+		= link_to "", admin_phase_path(phase, search: @query), remote: true, class: "show-row"
+		%span
+			= phase.name
+	%td{style:"width: 30%"}
+		= link_to "", admin_phase_path(phase, search: @query), remote: true, class: "show-row"
+		%span
+			= phase.description
+	%td{style:"width: 30%"}
+		= link_to "", admin_phase_path(phase, search: @query), remote: true, class: "show-row"
+		%span
+			= phase.project.name
+	- if can? :clone, Phase
+		%td{style:"width: 5%"}
+			= link_to admin_phase_clone_path(phase), class: "btn-floating waves-effect btn-flat" do
+				= material_icon.md_24.content_copy.css_class("md-dark")
+	%td{style:"width: 5%"}
+		= link_to admin_phase_path(phase), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

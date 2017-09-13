@@ -1,0 +1,57 @@
+= title(t('keppler.titles.show', model: "Orders"))
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, Order
+				= link_to admin_order_path(@order), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Order
+				= link_to edit_admin_order_path(@order), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_orders_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.id")
+						.display-value.fs-body-1.tc-black-2= @order.id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.name_client")
+						.display-value.fs-body-1.tc-black-2= @order.name_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.identification_client")
+						.display-value.fs-body-1.tc-black-2= @order.identification_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.phone_client")
+						.display-value.fs-body-1.tc-black-2= @order.phone_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.email_client")
+						.display-value.fs-body-1.tc-black-2= @order.email_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_planned")
+						.display-value.fs-body-1.tc-black-2= @order.date_start_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_real")
+						.display-value.fs-body-1.tc-black-2= @order.date_start_real.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_planned")
+						.display-value.fs-body-1.tc-black-2= @order.date_end_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_real")
+						.display-value.fs-body-1.tc-black-2= @order.date_end_real.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_pause")
+						.display-value.fs-body-1.tc-black-2= @order.date_pause.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.state")
+						.display-value.fs-body-1.tc-black-2= @order.state.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.payment_currency")
+						.display-value.fs-body-1.tc-black-2= @order.payment_currency.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.price_project")
+						.display-value.fs-body-1.tc-black-2= @order.price_project.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.project_id")
+						.display-value.fs-body-1.tc-black-2= @order.project_id.to_s.humanize

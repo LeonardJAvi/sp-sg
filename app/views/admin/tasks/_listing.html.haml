@@ -1,0 +1,34 @@
+%tr{ id: "row-#{task.id}" }
+	- if can? :destroy_multiple, Task
+		%td.item-check{style:"width: 10%"}
+			= link_to "", admin_task_path(task), remote: true, class: "show-row"
+			%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{task.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{task.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+			%label{ for: "checkbox-#{task.id}" }
+
+	%td{style:"width: 30%"}
+		= link_to "", admin_task_path(task, search: @query), remote: true, class: "show-row"
+		%span
+			= task.price_bolivar
+	%td{style:"width: 30%"}
+		= link_to "", admin_task_path(task, search: @query), remote: true, class: "show-row"
+		%span
+			= task.price_dolar
+	%td{style:"width: 30%"}
+		= link_to "", admin_task_path(task, search: @query), remote: true, class: "show-row"
+		%span
+			= task.cost_bolivar
+	%td{style:"width: 30%"}
+		= link_to "", admin_task_path(task, search: @query), remote: true, class: "show-row"
+		%span
+			= task.cost_dolar
+	%td{style:"width: 30%"}
+		= link_to "", admin_task_path(task, search: @query), remote: true, class: "show-row"
+		%span
+			= task.phase_id
+	- if can? :clone, Task
+		%td{style:"width: 5%"}
+			= link_to admin_task_clone_path(task), class: "btn-floating waves-effect btn-flat" do
+				= material_icon.md_24.content_copy.css_class("md-dark")
+	%td{style:"width: 5%"}
+		= link_to admin_task_path(task), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

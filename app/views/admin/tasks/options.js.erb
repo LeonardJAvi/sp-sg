@@ -1,0 +1,2 @@
+var html = "<%= j( collection_select(:task,:phase_id, @actividad, :id, :name, { prompt: "Select Phase -- [  Unassigned: #@j , Assigned: #@z , Total: #@k  ]"}, { class: 'browser-default'}) )%>";
+$('#activities').html(html);

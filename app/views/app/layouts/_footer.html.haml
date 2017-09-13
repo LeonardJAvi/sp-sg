@@ -1,0 +1,9 @@
+.front-footer{ class: "#{'navbar-fixed-bottom' if landing?}" }
+	#credits-slice
+		%span{class: "text-credits"} Powered by
+		= link_to "http://slicegroup.xyz", target:"_blank" do
+			= image_tag "app/slice-front.png", class: 'logo-slice'
+	#credits-keppler
+		%span{class: "text-credits"} System based on CMS
+		= link_to "http://slicegroup.xyz", target:"_blank" do
+			= image_tag "app/keppler-front" ,  class: 'logo-keppler'

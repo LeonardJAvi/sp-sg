@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name_client: MyString
+  identification_client: MyString
+  phone_client: MyString
+  email_client: MyString
+  date_start_planned: 2017-09-07
+  date_start_real: 2017-09-07
+  date_end_planned: 2017-09-07
+  date_end_real: 2017-09-07
+  date_pause: 2017-09-07
+  state: MyString
+  payment_currency: MyString
+  price_project: 1.5
+  project_id: MyString
+
+two:
+  name_client: MyString
+  identification_client: MyString
+  phone_client: MyString
+  email_client: MyString
+  date_start_planned: 2017-09-07
+  date_start_real: 2017-09-07
+  date_end_planned: 2017-09-07
+  date_end_real: 2017-09-07
+  date_pause: 2017-09-07
+  state: MyString
+  payment_currency: MyString
+  price_project: 1.5
+  project_id: MyString

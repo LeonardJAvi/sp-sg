@@ -1,0 +1,51 @@
+.front-footer {
+  color: $white;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px 30px 20px 30px;
+
+  // img {
+  //   width: 100px;
+
+  //   @include respond-to(xs) {
+  //     width: 50px;
+  //   }
+  // }
+  .logo-keppler{
+     height: 28px;
+     width: 100px;
+  }
+  .logo-slice{
+    height: 42px;
+  }
+  #credits-keppler{
+    width: 200px;
+    height: 70px;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    @include respond-to(xs) {
+         width: 130px;
+    }
+  }
+  #credits-slice{
+    width: 200px;
+    height: 70px;
+    float: right;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+      @include respond-to(xs) {
+         width: 130px;
+    }
+  }
+  .text-credits{
+   
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}

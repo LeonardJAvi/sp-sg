@@ -1,0 +1,32 @@
+!!!
+%html
+	%header
+		= render 'app/layouts/head'
+	%body
+		%header
+			= #render 'app/layouts/navigation'
+		%main{:role => "main"}
+			= #render 'app/layouts/messages'
+			.front
+				.front-logo
+					= image_tag "app/logon.png", class: "front-logo img-responsive"
+				.front-button
+					= link_to "admin", target:"_blank" do
+						%button.btn.btn-lg#go-app{:type => "button"} ¡Go App!
+				.front-social
+					%ul
+						%li
+							=   link_to "https://twitter.com/slicegroupxyz", target:"_blank" do
+								= icon 'twitter'
+						%li
+							=   link_to "https://www.facebook.com/slicegroupxyz/", target:"_blank" do
+								= icon 'facebook'
+						%li
+							=   link_to "https://www.instagram.com/slicegroupxyz/", target:"_blank" do
+								= icon 'instagram'
+						%li
+							=   link_to "https://github.com/SliceDevelopers", target:"_blank" do
+								= icon 'github'
+
+			%footer
+				= render 'app/layouts/footer'

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price_bolivar: MyString
+  price_dolar: MyString
+  cost_bolivar: MyString
+  cost_dolar: MyString
+  phase_id: MyString
+
+two:
+  price_bolivar: MyString
+  price_dolar: MyString
+  cost_bolivar: MyString
+  cost_dolar: MyString
+  phase_id: MyString

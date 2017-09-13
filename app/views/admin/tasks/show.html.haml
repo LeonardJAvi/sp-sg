@@ -1,0 +1,33 @@
+= title(t('keppler.titles.show', model: "Tasks"))
+.wrapper
+	.wrapper-body.container
+		.actions
+			- if can? :delete, Task
+				= link_to admin_task_path(@task), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+					= material_icon.md_18.delete.css_class("md-dark")
+			- if can? :update, Task
+				= link_to edit_admin_task_path(@task), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
+					= material_icon.md_18.create.css_class("md-dark")
+			= link_to admin_tasks_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.id")
+						.display-value.fs-body-1.tc-black-2= @task.id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.price_bolivar")
+						.display-value.fs-body-1.tc-black-2= @task.price_bolivar.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.price_dolar")
+						.display-value.fs-body-1.tc-black-2= @task.price_dolar.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.cost_bolivar")
+						.display-value.fs-body-1.tc-black-2= @task.cost_bolivar.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.cost_dolar")
+						.display-value.fs-body-1.tc-black-2= @task.cost_dolar.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.phase_id")
+						.display-value.fs-body-1.tc-black-2= @task.phase_id.to_s.humanize

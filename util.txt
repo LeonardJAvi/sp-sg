@@ -1,0 +1,286 @@
+util.txt
+
+rails g keppler_scaffold order name_client identification_client phone_client email_client date_start_planned:date date_start_real:date date_end_planned:date date_end_real:date date_pause:date status payment_currency:float price_project:float project_id -f
+
+
+
+
+
+
+
+
+
+= f.association :project
+
+# Order Model
+class Order < ActiveRecord::Base
+  include ActivityHistory
+  include CloneRecord
+  belongs_to :project
+
+  # Fields for the search form in the navbar
+  def self.search_field
+    :name_client_or_identification_client_or_phone_client_or_email_client_or_date_start_planned_or_date_start_real_or_date_end_planned_or_date_end_real_or_date_pause_or_status_or_payment_currency_or_price_project_or_project_id_cont
+  end
+end
+
+
+
+
+
+
+
+
+
+module Admin
+  # OrdersController
+  class OrdersController < AdminController
+    before_action :set_order, only: [:show, :edit, :update, :destroy]
+    before_action :show_history, only: [:index]
+
+    # GET /orders
+    def index
+      @q = Order.ransack(params[:q])
+      orders = @q.result(distinct: true)
+      @objects = orders.page(@current_page)
+      @total = orders.size
+      if !@objects.first_page? && @objects.size.zero?
+        redirect_to orders_path(page: @current_page.to_i.pred, search: @query)
+      end
+    end
+
+    # GET /orders/1
+    def show
+    end
+
+    # GET /orders/new
+    def new
+      @order = Order.new
+      @stack_client_name = Premium::Client.all.map {|obj| obj.nombre}
+      @tasks = Task.all
+      @Projects = Project.all
+    end
+
+    # GET /orders/1/edit
+    def edit
+    end
+
+    # POST /orders
+    def create
+      @order = Order.new(order_params)
+
+      if @order.save
+        redirect(@order, params)
+      else
+        render :new
+      end
+    end
+
+    # PATCH/PUT /orders/1
+    def update
+      if @order.update(order_params)
+        redirect(@order, params)
+      else
+        render :edit
+      end
+    end
+
+    def clone
+      @order = Order.clone_record params[:order_id]
+
+      if @order.save
+        redirect_to admin_orders_path
+      else
+        render :new
+      end
+    end
+
+    # DELETE /orders/1
+    def destroy
+      @order.destroy
+      redirect_to admin_orders_path, notice: actions_messages(@order)
+    end
+
+    def destroy_multiple
+      Order.destroy redefine_ids(params[:multiple_ids])
+      redirect_to(
+        admin_orders_path(page: @current_page, search: @query),
+        notice: actions_messages(Order.new)
+      )
+    end
+
+    private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_order
+      @order = Order.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def order_params
+      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause, :state, :payment_currency, :price_project,:cost_project, :project_id)
+    end
+
+    def show_history
+      get_history(Order)
+    end
+  end
+end
+
+
+
+
+
+= f.input :name
+              = f.input :description
+              -# = f.input :project_id
+              = f.input :project_id, collection: @projects, label: false, value_method: :id, include_blank: 'Select Project', input_html: { class: "browser-default" }
+
+
+
+
+///////////////////////////Automatic Data//////////////////////////
+
+
+
+Phase.create(name:'Diseño Wireframe', description:'Lorem', project_id:'2')
+Phase.create(name:'Exportación Assest', description:'Lorem', project_id:'2')
+Phase.create(name:'Redacción de Contenidos', description:'Lorem', project_id:'2')
+Phase.create(name:'Implementacion de Keppler', description:'Lorem', project_id:'2')
+Phase.create(name:'Implementar Catálogos', description:'Lorem', project_id:'2')
+Phase.create(name:'Iniciar Pruebas', description:'Lorem', project_id:'2')
+Phase.create(name:'Cargar Contenidos', description:'Lorem', project_id:'2')
+Phase.create(name:'Subir a Producción', description:'Lorem', project_id:'2')
+
+
+State.create(name:'Pending')
+State.create(name:'In process')
+State.create(name:'Internal Verification')
+State.create(name:'Customer Verification')
+State.create(name:'Paused')
+State.create(name:'Annulled')
+State.create(name:'Delivered')
+
+canceled
+cancelado, anulado, suprimido, interrumpido
+
+
+
+
+
+
+
+
+Nullified
+Inbound
+
+
+Task.create(name:'Subir a Producción', description:'Lorem', project_id:'2')
+
+
+
+Task.create(price_bolivar:'20000', price_dolar:'20',cost_bolivar:'10000',cost_dolar:'10',phase_id:'2')
+///////////////////////////Automatica Data////////////////////////
+
+
+
+
+:javascript
+
+  -# $(document).ready(function() {  
+  -#  $('.datepicker').pickadate ({
+  -#    min: new Date();
+  -#    -# selectMonths: true,
+  -#    -# yearSelector: false,
+  -#    -# hiddenName: true,
+  -#    -# selectYears: 1,
+  -#    -# editable: false,
+  -#    -# firstDay: 1,
+  -#    -# format: 'dd/mm/yyyy',
+  -#    -# formatSubmit: 'yyyy-mm-dd',
+  -#  });
+  -# });
+  
+  
+
+  -# var inicio = $('#order_date_start_real').pickadate(),
+  -# inicio_picker = inicio.pickadate('picker')
+
+  -# var final = $('#order_date_end_real')
+  .pickadate(),
+  -# final_picker = final.pickadate('picker')
+
+  -# // Check if there’s a “from” or “to” date to start with.
+  -# if (inicio_picker.get('value')) {
+  -#  final_picker.set('min', inicio_picker.get('select'))
+  -# }
+  -# if (final_picker.get('value')) {
+  -#  inicio_picker.set('max', final_picker.get('select'))
+  -# }
+
+  -# // When something is selected, update the “from” and “to” limits.
+  -# inicio_picker.on('set', function(event) {
+  -#  if (event.select) {
+  -#    final_picker.set('min', inicio_picker.get('select'))
+  -#  } else if ('clear' in event) {
+  -#    final_picker.set('min', false)
+  -#  }
+  -# })
+  -# final_picker.on('set', function(event) {
+  -#  if (event.select) {
+  -#    inicio_picker.set('max', final_picker.get('select'))
+  -#  } else if ('clear' in event) {
+  -#    inicio_picker.set('max', false)
+  -#  }
+  -# })
+
+  -# });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.wrapper
+    .wrapper-body.container
+        .actions
+            = link_to admin_orders_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+                = material_icon.md_18.arrow_back.css_class("md-dark")
+        .wrapper-inputs
+            .card
+                .card-content
+                    = simple_form_for [:admin, @order] do |f|
+                        .row
+                            = f.input :name_client
+                            = f.input :identification_client
+                            = f.input :phone_client
+                            = f.input :email_client
+                            = f.association :project, label: false,  label_method: :name,value_method: :id, include_blank: 'Select Project', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
+                            = f.input :payment_currency
+                            = f.input :price_project,  input_html: { type: "text" }
+                            = f.input :date_start_real, as: :string, input_html: {class: "datepicker"}
+                            = f.input :date_end_real, as: :string, input_html: {class: "datepicker"}
+                            = f.input :date_start_planned, as: :string, input_html: {class: "datepicker"}
+                            = f.input :date_end_planned, as: :string, input_html: {class: "datepicker"}
+                            = f.input :date_pause, as: :string, input_html: {class: "datepicker"}
+
+                            
+                            .form-actions.right
+                                = f.button :submit, t("keppler.actions.save"), name: '_save'
+                                = f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
+
+

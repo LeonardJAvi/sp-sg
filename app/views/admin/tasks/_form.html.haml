@@ -1,0 +1,40 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_tasks_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.wrapper-inputs
+			.card
+				.card-content
+					= simple_form_for [:admin, @task] do |f|
+						.row
+							= f.input :project, collection: @projects, label: false,  label_method: :name,value_method: :id, include_blank: 'Select Project', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
+							#activities{:style => "margin-bottom: 5px;", class: "col input-field optional s12 select"}
+							= f.input :price_bolivar
+							= f.input :price_dolar
+							= f.input :cost_bolivar
+							= f.input :cost_dolar
+
+							.form-actions.right
+								= f.button :submit, t("keppler.actions.save"), name: '_save'
+								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
+
+
+						
+
+
+:javascript
+
+	  $(document).ready(function() {
+		$('#task_project').on('change', function() {
+			$.ajax({
+				url: "#{phases_options_path}",
+				type: "POST",
+				data: { project_id: $(this).val() }
+			});
+		});
+		$('select').material_select();
+	});
+     
+
+	  

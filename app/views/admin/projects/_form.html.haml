@@ -1,0 +1,19 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+			= link_to admin_projects_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+				= material_icon.md_18.arrow_back.css_class("md-dark")
+		.wrapper-inputs
+			.card
+				.card-content
+					= simple_form_for [:admin, @project] do |f|
+						.row
+							= f.input :name, collection: @stack_product, label: false,include_blank: 'Select Project', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
+							= f.input :group
+						
+
+							.form-actions.right
+								= f.button :submit, t("keppler.actions.save"), name: '_save'
+								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
+
+
