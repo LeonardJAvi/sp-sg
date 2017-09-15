@@ -3,7 +3,7 @@
 		.devise-vertical
 			.devise-box.card
 				.devise-box-header
-					.devise-box-title Registro
+					.devise-box-title Planner
 				= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :role => 'form'}) do |f|
 					.devise-box-body.row
 						.input-field.col.s4
@@ -33,9 +33,13 @@
 						.input-field.col.s4
 							= f.text_field :address,  :autofocus => true, class: "form-control"
 							= f.label :address
+						.devise-errors.center-align
+							= devise_error_messages!
 					.devise-box-footer.row
 						.col.s9.m6.l6
-							= devise_error_messages!
+							- if devise_mapping.database_authenticatable?
+								= link_to session_path(resource_name), class: "recoverable" do
+									= t("devise.sessions.sign_in")
 						.col.s3.m6.l6
 							= f.submit 'Sign up', :class => 'right btn'
 						.col.s12.devise-logo.center-align.hidden-xs

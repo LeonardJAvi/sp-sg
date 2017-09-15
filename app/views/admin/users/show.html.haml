@@ -13,7 +13,12 @@
 		.card
 			.card-content
 				%ul.list
-					- @user.as_json(only: ["id", "name", "permalink", "email","created_at", "sign_in_count", "updated_at", "password"], methods: [:rol]).each do |attribute, value|
+					- @user.as_json(only: ["id", "name", "last_name", "identification","email","phone", "address", "birthdate","created_at", "sign_in_count", "updated_at", "password"], methods: [:rol]).each do |attribute, value|
 						%li.list-row
 							.display-label= t("activerecord.attributes.user.#{attribute}")
 							.display-value.fs-body-1.tc-black-2= value.to_s.humanize
+
+
+
+
+  

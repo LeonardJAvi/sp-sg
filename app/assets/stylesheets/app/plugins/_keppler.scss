@@ -7,10 +7,11 @@
   @include display(flex);
   @include flex-direction(column);
   @include justify-content(center);
-  background-image: url("Home_Keppler.png");
-  background-size: cover;
-  background-position: 100% 90%;
+  // background-image: url("Home_Keppler.png");
+  // background-size: cover;
+  // background-position: 100% 90%;
   height: 100%;
+
   &-logo {
     img {
       @include respond-to(xs) {
@@ -20,7 +21,9 @@
   }
 
   &-social {
-    margin-top: 30px;
+    // margin-top: 30px;
+    margin-top: 1px;
+    margin-bottom: 25px;
 
     ul {
       margin: 0 20px;
@@ -51,57 +54,50 @@
     }
   }
 }
- .mask-front{
-    width: 100%;
+
+.front:before {
+    background-image: url(icon-slice.png);
+    background-size: 150%;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-  }
+    width: 100%;
+    display: block;
+    z-index: 0 !important;
+    content: "";
+    opacity: 0.3;
+    pointer-events: none;
+}
 
- .hero
-  {
-  -ms-flex-align:stretch;
-  align-items:stretch;
-  background-color:#fff;
-  display:-ms-flexbox;
-  display:flex;
-  -ms-flex-direction:column;
-  flex-direction:column;
-  -ms-flex-pack:justify;
-  justify-content:space-between
-  }
-
- .hero--scotch
- {
-  position:relative;
-  overflow:hidden;
+.mask-front{
+  width: 100%;
   height: 100%;
- }
-
-.hero--scotch:before{
-  background-position:50%;
-  background-size:750px;
-  background-image:url(icon-slice.png);
-  position:absolute;
-  top:0;
-  left:0;
-  height:400%;
-  width:100%;
-  display:block;
-  z-index:0;
-  content:"";
-  opacity: 0.3;
-  pointer-events:none
+  background: rgba(0, 0, 0, 0.85);
 }
 
-.hero-sunset {
-  
-    background-color: #47535b;
-    border-right: 2px dashed white;
+.front,
+.mask-front{
+  z-index: 1 !important;
 }
+
+.front-social,
+.front-button,
+.front-logo{
+  z-index: 1 !important;
+}
+
 
 #go-app{
   border-radius: 0px !important;
   outline: none !important;
-  font-size: 22px !important;
-  color: #252427 !important;
+  font-size: 24px !important;
+  color: #BF5010 !important;
+  font-weight: bold !important;
+  background: #fff !important;
+  box-shadow: 0px 12px 20px 0px rgba(255, 255, 255, 0);
+  @include respond-to(xs) {
+    font-size: 12px !important;
+  }
 }

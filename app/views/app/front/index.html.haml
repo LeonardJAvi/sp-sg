@@ -7,12 +7,9 @@
 			= #render 'app/layouts/navigation'
 		%main{:role => "main"}
 			= #render 'app/layouts/messages'
-			.front
+			.front.mask-front
 				.front-logo
 					= image_tag "app/logon.png", class: "front-logo img-responsive"
-				.front-button
-					= link_to "admin", target:"_blank" do
-						%button.btn.btn-lg#go-app{:type => "button"} ¡Go App!
 				.front-social
 					%ul
 						%li
@@ -27,6 +24,10 @@
 						%li
 							=   link_to "https://github.com/SliceDevelopers", target:"_blank" do
 								= icon 'github'
+				.front-button
+					= link_to "admin", target:"_blank" do
+						%button.btn.btn-lg#go-app{:type => "button"} ¡Go App!
 
 			%footer
 				= render 'app/layouts/footer'
+

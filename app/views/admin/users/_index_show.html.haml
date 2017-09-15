@@ -12,7 +12,7 @@
 .listing-show-body.card{ resize: true , style: "height: {{windowHeight}}px;" }
 	.card-content
 		%ul.list
-			- @user.as_json(only: ["id", "name", "permalink", "email", "created_at", "sign_in_count", "updated_at", "password"]).each do |attribute, value|
+			- @user.as_json(only: ["id", "name", "permalink", "email", "phone","created_at", "sign_in_count", "updated_at", "password"]).each do |attribute, value|
 				%li.list-row
 					.display-label= t("activerecord.attributes.user.#{attribute}")
 					.display-value= value

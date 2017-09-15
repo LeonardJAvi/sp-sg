@@ -1,8 +1,18 @@
 .devise {
-  background-image: url('profile-menu.jpg');
-  background-position: center;
-  background-size: cover;
+  // background-image: url('space.jpg');
+  // // background-position: center;
+  // // background-size: cover;
+  // height: 100%;
+  position:relative;
+  overflow:hidden;
   height: 100%;
+ 
+    //  background-image: url(space.jpg);
+    // background-size: cover;
+    // height: 100%;
+    // background-size: 105%;
+    // background-position: 100% 75%;
+    // background-repeat: no-repeat;
 
   .container {
     height: 100%;
@@ -11,6 +21,7 @@
   .recoverable {
     position: relative;
     top: 7px;
+    display: block;
   }
 
   .devise-errors {
@@ -72,4 +83,44 @@
       padding: 0 15px 15px;
     }
   }
+}
+
+.mask-devise {
+  background: rgba(0, 0, 0, 0.75);  
+}
+
+// .devise:before {
+//     background-image: url(space.jpg);
+//     background-size: cover;
+//     height: 100%;
+//     background-size: 105%;
+//     background-position: 100% 75%;
+//     background-repeat: no-repeat;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     height: 100%;
+//     width: 100%;
+//     display: block;
+//     z-index: 0;
+//     content: "";
+//     opacity: 0.9;
+//     pointer-events: none;
+// }
+.devise:before {
+    background-image: url(space.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    // background-position: center bottom;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    z-index: 0;
+    content: "";
+    opacity: 0.9;
+    pointer-events: none;
 }

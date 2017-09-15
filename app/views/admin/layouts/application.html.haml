@@ -13,5 +13,5 @@
 			%main.row.admin{ role: 'main', 'ng-click' => 'sidebarClose()' }
 				= yield
 		- else
-			%main.devise{ style: @appearance.image_background? ? "background-image: url(#{@appearance.image_background})" : nil  }
+			%main.devise.mask-devise{ style: @appearance.image_background? ? "background-image: url(#{@appearance.image_background})" : nil  }
 				= yield
