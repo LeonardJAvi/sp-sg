@@ -4,26 +4,26 @@ menu:
     url_path: /admin/dashboard
     icon: dashboard
     current: ['keppler_ga_dashboard/dashboard']
-  seo:
-    name: SEO
-    current: ['admin/meta_tags', 'admin/google_adwords']
-    icon: code
-    model: MetaTag
-    submenu:
-      - meta_tags:
-          name: 'Title & Metas'
-          url_path: /admin/meta_tags
-          current: ['admin/meta_tags']
-      - google_adwords:
-          name: Google Adwords
-          url_path: /admin/google_adwords
-          current: ['admin/google_adwords']
-  google_analytics_track:
-    name: google analytics tracks
-    url_path: /admin/google_analytics_tracks
-    icon: insert_chart
-    current: ['admin/google_analytics_tracks']
-    model: GoogleAnalyticsTrack
+  # seo:
+  #   name: SEO
+  #   current: ['admin/meta_tags', 'admin/google_adwords']
+  #   icon: code
+  #   model: MetaTag
+  #   submenu:
+  #     - meta_tags:
+  #         name: 'Title & Metas'
+  #         url_path: /admin/meta_tags
+  #         current: ['admin/meta_tags']
+  #     - google_adwords:
+  #         name: Google Adwords
+  #         url_path: /admin/google_adwords
+  #         current: ['admin/google_adwords']
+  # google_analytics_track:
+  #   name: google analytics tracks
+  #   url_path: /admin/google_analytics_tracks
+  #   icon: insert_chart
+  #   current: ['admin/google_analytics_tracks']
+  #   model: GoogleAnalyticsTrack
   project:
     name: projects
     url_path: /admin/projects
@@ -33,47 +33,53 @@ menu:
   phase:
     name: phases
     url_path: /admin/phases
-    icon: insert_chart
+    icon: check_box
     current: ['admin/phases']
     model: Phase
   task:
     name: tasks
     url_path: /admin/tasks
-    icon: insert_chart
+    icon: access_time
     current: ['admin/tasks']
     model: Task
   order:
     name: orders
     url_path: /admin/orders
-    icon: insert_chart
+    icon: assignment_turned_in
     current: ['admin/orders']
     model: Order
-  state:
-    name: states
-    url_path: /admin/states
-    icon: insert_chart
-    current: ['admin/states']
-    model: State
+  # stack_phase:
+  #   name: stack phases
+  #   url_path: /admin/stack_phases
+  #   icon: storage
+  #   current: ['admin/stack_phases']
+  #   model: StackPhase
+  stack_state:
+    name: stack states
+    url_path: /admin/stack_states
+    icon: storage
+    current: ['admin/stack_states']
+    model: StackState
   user:
     name: users
     url_path: /admin/users
     icon: account_circle
     current: ["admin/users"]
     model: User
-  customize:
-    name: keppler design
-    icon: color_lens
-    current: ['admin/customizes']
-    model: Customize
-    submenu:
-      - customize:
-          name: frontend templates
-          url_path: /admin/customizes
-          current: ['admin/customizes']
-      - appearance:
-          name: admin appearance
-          url_path: /admin/settings/appearance
-          current: ['appearance']
+  # customize:
+  #   name: keppler design
+  #   icon: color_lens
+  #   current: ['admin/customizes']
+  #   model: Customize
+  #   submenu:
+  #     - customize:
+  #         name: frontend templates
+  #         url_path: /admin/customizes
+  #         current: ['admin/customizes']
+  #     - appearance:
+  #         name: admin appearance
+  #         url_path: /admin/settings/appearance
+  #         current: ['appearance']
   setting:
     name: setting
     current: ['admin/settings']

@@ -29,29 +29,35 @@
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.email_client")
 						.display-value.fs-body-1.tc-black-2= @order.email_client.to_s.humanize
 					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_planned")
-						.display-value.fs-body-1.tc-black-2= @order.date_start_planned.to_s.humanize
-					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_real")
-						.display-value.fs-body-1.tc-black-2= @order.date_start_real.to_s.humanize
-					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_planned")
-						.display-value.fs-body-1.tc-black-2= @order.date_end_planned.to_s.humanize
-					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_real")
-						.display-value.fs-body-1.tc-black-2= @order.date_end_real.to_s.humanize
-					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_pause")
-						.display-value.fs-body-1.tc-black-2= @order.date_pause.to_s.humanize
-					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.state")
-						.display-value.fs-body-1.tc-black-2= @order.state.to_s.humanize
-					%li.list-row
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.payment_currency")
 						.display-value.fs-body-1.tc-black-2= @order.payment_currency.to_s.humanize
 					%li.list-row
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.price_project")
 						.display-value.fs-body-1.tc-black-2= @order.price_project.to_s.humanize
 					%li.list-row
-						.display-label= t("activerecord.attributes.#{controller_name.singularize}.project_id")
-						.display-value.fs-body-1.tc-black-2= @order.project_id.to_s.humanize
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_real")
+						.display-value.fs-body-1.tc-black-2= @order.date_start_real.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_real")
+						.display-value.fs-body-1.tc-black-2= @order.date_end_real.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_planned")
+						.display-value.fs-body-1.tc-black-2= @order.date_start_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_planned")
+						.display-value.fs-body-1.tc-black-2= @order.date_end_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_pause")
+						.display-value.fs-body-1.tc-black-2= @order.date_pause.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.observation")
+						.display-value.fs-body-1.tc-black-2= @order.observation.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.stackstate_id")
+						.display-value.fs-body-1.tc-black-2= @order.stack_state.name.to_s.humanize
+				
+				
+
+
+
+

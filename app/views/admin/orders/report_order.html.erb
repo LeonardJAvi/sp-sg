@@ -1,0 +1,55 @@
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+
+<%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
+	<%date_start = $parametro.date_start_real = "11/11/1111"%></br>
+	<%date_end = $parametro.date_end_real = "11/11/1111"%></br>
+<%end%>
+
+<%@orders.each do |order|%>
+	<%if $parametro.state == order.state%>
+		<%if $parametro.project == order.project%>
+			<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+				<%="si status, si  project, si la fecha  #{order.id}"%></br>
+			
+			<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+				<%="si status, si  project, no la fecha  #{order.id}"%></br>
+			<%end%>
+		
+
+		<%elsif $parametro.project == nil%>
+			<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+							<%="si status, no project, si la fecha  #{order.id}"%></br>
+						
+			<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+							<%="si status, no  project, no la fecha  #{order.id}"%></br>
+			<%end%>
+		<%end%>
+
+	<%elsif $parametro.state == nil%>
+		<%if $parametro.project == order.project%>
+			<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+				<%="no status, si  project, si la fecha  #{order.id}"%></br>
+			
+			<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+				<%="no status, si  project, no la fecha  #{order.id}"%></br>
+			<%end%>
+		
+
+		<%elsif $parametro.project == nil%>
+			<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+							<%="no status, no project, si la fecha  #{order.id}"%></br>
+						
+			<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+							<%="no status, no  project, no la fecha  #{order.id}"%></br>
+			<%end%>
+		<%end%>
+
+	<%end%>
+
+<%end%>

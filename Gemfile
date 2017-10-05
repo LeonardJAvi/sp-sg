@@ -39,6 +39,11 @@ gem 'jquery-minicolors-rails'
 gem 'carrierwave'
 # gem 'rmagick'
 
+#PDF
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+# gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
+
 # Desgin
 gem 'bourbon'
 gem 'bootstrap-sass', '~> 3.3.6'

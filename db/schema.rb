@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170913130419) do
+ActiveRecord::Schema.define(version: 20170917202342) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -87,7 +87,8 @@ ActiveRecord::Schema.define(version: 20170913130419) do
     t.string   "user_responsible",      limit: 255
     t.string   "project_id",            limit: 255
     t.string   "order_id",              limit: 255
-    t.string   "state_id",              limit: 255
+    t.string   "observation",           limit: 255
+    t.string   "stack_state_id",        limit: 255
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
@@ -107,16 +108,16 @@ ActiveRecord::Schema.define(version: 20170913130419) do
     t.string   "phone_client",          limit: 255
     t.string   "email_client",          limit: 255
     t.date     "date_start_planned"
-    t.date     "date_start_real"
     t.date     "date_end_planned"
+    t.date     "date_start_real"
     t.date     "date_end_real"
     t.date     "date_pause"
-    t.string   "state",                 limit: 255
     t.string   "payment_currency",      limit: 255
     t.float    "price_project",         limit: 24
     t.string   "user_responsible",      limit: 255
     t.string   "project_id",            limit: 255
-    t.string   "state_id",              limit: 255
+    t.string   "stack_state_id",        limit: 255
+    t.string   "observation",           limit: 255
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
@@ -130,10 +131,11 @@ ActiveRecord::Schema.define(version: 20170913130419) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "group",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "name",             limit: 255
+    t.string   "group",            limit: 255
+    t.integer  "notification_day", limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "roles", force: :cascade do |t|
@@ -192,13 +194,14 @@ ActiveRecord::Schema.define(version: 20170913130419) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "states", force: :cascade do |t|
+  create_table "stack_states", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.float    "number_hours",  limit: 24
     t.string   "price_bolivar", limit: 255
     t.string   "price_dolar",   limit: 255
     t.string   "cost_bolivar",  limit: 255
@@ -212,6 +215,11 @@ ActiveRecord::Schema.define(version: 20170913130419) do
     t.string   "name",                   limit: 255
     t.string   "permalink",              limit: 255
     t.string   "username",               limit: 255
+    t.string   "phone",                  limit: 255
+    t.string   "address",                limit: 255
+    t.string   "last_name",              limit: 255
+    t.string   "identification",         limit: 255
+    t.date     "birthdate"
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
@@ -224,11 +232,6 @@ ActiveRecord::Schema.define(version: 20170913130419) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "phone",                  limit: 255
-    t.string   "address",                limit: 255
-    t.string   "last_name",              limit: 255
-    t.string   "identification",         limit: 255
-    t.date     "birthdate"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

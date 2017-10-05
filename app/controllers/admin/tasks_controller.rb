@@ -27,6 +27,7 @@ module Admin
 
     # GET /tasks/1/edit
     def edit
+      @projects = Project.all
     end
 
     # POST /tasks
@@ -76,31 +77,22 @@ module Admin
     end
 
     #Peticiones AJAX
-
     def options
-       @actividad = []
+       @item = []
        # @phases = Project.find(params[:project_id]).phases
        @phases = Phase.where(project_id: params[:project_id])
-       @k = 0
-       @j = 0
-       @z = 0
+       @total = 0
+       @unassigned = 0
+       @assigned = 0
        @phases.each do |phase|
-          
-          @k = @phases.size
-
+          @total = @phases.size
           if phase.task == nil
-            
-            @actividad << phase
-            @j = @actividad.size
-           
-            
+            @item << phase
+            @unassigned = @item.size
           end
       end
-      @z = @k-@j
-      
-    end
-
-
+      @assigned = @total-@unassigned
+    end   
 
     private
 
@@ -111,7 +103,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:price_bolivar, :price_dolar, :cost_bolivar, :cost_dolar, :phase_id)
+      params.require(:task).permit(:price_bolivar, :price_dolar, :cost_bolivar, :cost_dolar, :name, :number_hours, :phase_id)
     end
 
     def show_history
@@ -119,3 +111,6 @@ module Admin
     end
   end
 end
+
+
+

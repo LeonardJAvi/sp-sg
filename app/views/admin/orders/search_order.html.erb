@@ -1,0 +1,14 @@
+</br>
+</br>
+</br>
+</br>
+<%= form_for (@order),url: :create_report_admin_orders, method: :post do |f| %>
+		<label>"status"</label>
+		<%=f.text_field :state_id%>
+		<label>"project"</label>
+		<%=f.text_field :project_id%>
+		<%=f.date_field :date_start_real,class:"datepicker"%>
+    	<%=f.date_field :date_end_real,class:"datepicker"%>
+ 	   <div class="actions"><%= f.submit "Search" %></div>
+
+<%end%>

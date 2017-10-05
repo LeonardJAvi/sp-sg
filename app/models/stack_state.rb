@@ -1,5 +1,5 @@
-# State Model
-class State < ActiveRecord::Base
+# StackState Model
+class StackState < ActiveRecord::Base
   include ActivityHistory
   include CloneRecord
   belongs_to :order
@@ -9,3 +9,5 @@ class State < ActiveRecord::Base
     :name_cont
   end
 end
+
+

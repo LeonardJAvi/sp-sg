@@ -19,6 +19,10 @@ module Admin
     def show
     end
 
+    def view_data
+      @phase = phase.find(params[:phase_id])
+    end
+
     # GET /phases/new
     def new
       @phase = Phase.new
@@ -27,6 +31,7 @@ module Admin
 
     # GET /phases/1/edit
     def edit
+      @projects = Project.all
     end
 
     # POST /phases

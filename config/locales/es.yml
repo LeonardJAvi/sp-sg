@@ -1,7 +1,7 @@
 es:
   keppler:
     sidebar-menu:
-      states: States
+      stack_states: Stack states
       orders: Orders
       tasks: Tasks
       phases: Phases
@@ -28,7 +28,7 @@ es:
         categories: Categorías
     models:
       singularize:
-        state: state
+        stack_state: stack state
         order: order
         task: task
         phase: phase
@@ -41,7 +41,7 @@ es:
         configuration: configuración
         user: usuario
       pluralize:
-        states: states
+        stack_states: stack states
         orders: orders
         tasks: tasks
         phases: phases
@@ -54,7 +54,7 @@ es:
         configurations: configuraciones
         user: usuarios
     modules:
-      admin/states: States
+      admin/stack_states: Stack states
       admin/orders: Orders
       admin/tasks: Tasks
       admin/phases: Phases

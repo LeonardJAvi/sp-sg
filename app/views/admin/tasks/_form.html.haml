@@ -10,18 +10,18 @@
 						.row
 							= f.input :project, collection: @projects, label: false,  label_method: :name,value_method: :id, include_blank: 'Select Project', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
 							#activities{:style => "margin-bottom: 5px;", class: "col input-field optional s12 select"}
-							= f.input :price_bolivar
-							= f.input :price_dolar
-							= f.input :cost_bolivar
-							= f.input :cost_dolar
-
+							-# = f.input :name, label: 'Name task'
+							= f.input :number_hours, label: 'Number of hours'
+							= f.input :price_bolivar, label: 'Price - BsF'
+							= f.input :price_dolar, label: 'Price - $'
+							= f.input :cost_bolivar, label: 'Cost - BsF'
+							= f.input :cost_dolar, label: 'Cost - $'
 							.form-actions.right
 								= f.button :submit, t("keppler.actions.save"), name: '_save'
 								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
 
 
 						
-
 
 :javascript
 

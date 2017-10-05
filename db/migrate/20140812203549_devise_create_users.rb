@@ -5,6 +5,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :permalink
       t.string :username
+      t.string :phone
+      t.string :address
+      t.string :last_name
+      t.string :identification
+      t.date :birthdate
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

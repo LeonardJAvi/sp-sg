@@ -16,7 +16,8 @@ class CreateHistoryorders < ActiveRecord::Migration
       t.string :user_responsible
       t.string :project_id
       t.string :order_id
-      t.string :state_id
+      t.string :observation
+      t.string :stack_state_id
       t.timestamps null: false
     end
   end

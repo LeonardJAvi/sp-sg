@@ -7,8 +7,8 @@ class Ability
 
     if user.has_role? :admin
 
-      # - State authorize -
-      can :manage, State
+      # - StackState authorize -
+      can :manage, StackState
 
       # - Order authorize -
       can :manage, Order

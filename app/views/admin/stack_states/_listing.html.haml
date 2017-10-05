@@ -1,0 +1,18 @@
+%tr{ id: "row-#{stack_state.id}" }
+	-# - if can? :destroy_multiple, StackState
+	-# 	%td.item-check{style:"width: 10%"}
+	-# 		= link_to "", admin_stack_state_path(stack_state), remote: true, class: "show-row"
+	-# 		%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{stack_state.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{stack_state.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+	-# 		%label{ for: "checkbox-#{stack_state.id}" }
+	%td{style:"width: 1%"}
+	%td{style:"width: 30%"}
+		= link_to "", admin_stack_state_path(stack_state, search: @query), remote: true, class: "show-row"
+		%span
+			= stack_state.name
+	-# - if can? :clone, StackState
+	-# 	%td{style:"width: 5%"}
+	-# 		= link_to admin_stack_state_clone_path(stack_state), class: "btn-floating waves-effect btn-flat" do
+	-# 			= material_icon.md_24.content_copy.css_class("md-dark")
+	%td{style:"width: 5%"}
+		= link_to admin_stack_state_path(stack_state), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.more_horiz.css_class("md-dark")

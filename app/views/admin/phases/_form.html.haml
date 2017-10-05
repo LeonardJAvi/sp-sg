@@ -8,11 +8,10 @@
 				.card-content
 					= simple_form_for [:admin, @phase] do |f|
 						.row
-							= f.input :name
+							= f.input :project_id, collection: @projects, label: false, value_method: :id, include_blank: 'Select Project', input_html: { class: "browser-default" ,  style:"margin-bottom: 5px;" }
+							= f.input :name, collection: @list_phases, label: false,include_blank: 'Select Phase', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
 							= f.input :description
 							-# = f.input :project_id
-							= f.input :project_id, collection: @projects, label: false, value_method: :id, include_blank: 'Select Project', input_html: { class: "browser-default" }
-
 							.form-actions.right
 								= f.button :submit, t("keppler.actions.save"), name: '_save'
 								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'

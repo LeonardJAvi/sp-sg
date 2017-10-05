@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: KepplerConfiguration.skip_module_devise
 
   namespace :admin do
-    resources :states do
+    resources :stack_states do
       get '(page/:page)', action: :index, on: :collection, as: ''
       get '/clone', action: 'clone'
       delete(
@@ -17,13 +17,29 @@ Rails.application.routes.draw do
 
     resources :orders do
       get '(page/:page)', action: :index, on: :collection, as: ''
-      get '/clone', action: 'clone'
+      # get '/clone', action: 'clone'
+      get '/history', action: 'history'
+      get '/search_order', action: :search_order, on: :collection, as: 'search_order'
       delete(
         action: :destroy_multiple,
         on: :collection,
         as: :destroy_multiple
       )
     end
+
+    # resources :orders do
+
+    #   get '(page/:page)', action: :index, on: :collection, as: ''
+    #   get '/clone', action: 'clone'
+    #   # get '/view_data', action: 'view_data'
+    #   # get '/report', action: :report, on: :collection, as: 'report'
+    #   # post '/create_report', action: :create_report, on: :collection, as: 'create_report'
+    #   delete(
+    #     action: :destroy_multiple,
+    #     on: :collection,
+    #     as: :destroy_multiple
+    #   )
+    # end
 
     resources :tasks do
       get '(page/:page)', action: :index, on: :collection, as: ''
@@ -119,12 +135,19 @@ Rails.application.routes.draw do
 
 
   #Peticiones AJAX 
+  resources :projects
+  post 'admin/projects/search', as: 'projects_search'
+
   resources :phases
   post 'admin/tasks/options', as: 'phases_options'
 
+  resources :orders
+  post 'admin/orders/project', as: 'orders_project'
+  post 'admin/orders/payment_currency', as: 'orders_payment_currency'
 
-  resources :tasks
-  post 'admin/tasks/dinamic', as: 'tasks_dinamic'
+
+  # resources :tasks
+  # post 'admin/tasks/dinamic', as: 'tasks_dinamic'
   
 
   # Errors routes

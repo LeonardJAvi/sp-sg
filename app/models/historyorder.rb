@@ -1,4 +1,4 @@
 class Historyorder < ActiveRecord::Base
 	belongs_to :order
-	belongs_to :state
+	belongs_to :stackstate
 end

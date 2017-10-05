@@ -21,20 +21,28 @@ module Admin
 
     # GET /projects/new
     def new
-      @project = Project.new
-      @stack_product=Premium::Article.all.map {|obj| obj.nombre}
-      @stack_group=Premium::Article.all.map {|obj| obj.grupo}
-      @stack_client_name=Premium::Client.all.sort.map {|obj| obj.nombre}
+      @project = Project.new  
+      @list_project_name = Premium::Article.all.map {|obj| obj.nombre}
+      @type_department = [ 'Dev', 'Social', 'Brand', 'Tech'] 
     end
 
     # GET /projects/1/edit
     def edit
+      @list_project_name = Premium::Article.all.map {|obj| obj.nombre}
     end
 
     # POST /projects
     def create
       @project = Project.new(project_params)
-
+      @stack_product=Premium::Article.all
+      @stack_product.each do |articulo|
+        if @project.name == articulo.nombre
+           @project.group = articulo.grupo
+        else
+          puts "¡Error! create"
+        end
+      end
+      
       if @project.save
         redirect(@project, params)
       else
@@ -44,8 +52,20 @@ module Admin
 
     # PATCH/PUT /projects/1
     def update
+
       if @project.update(project_params)
+       
         redirect(@project, params)
+
+         @stack_product=Premium::Article.all
+        @stack_product.each do |articulo|
+          if @project.name == articulo.nombre
+             puts "esto es group antes #{@project.group}"
+            @project.group = "00"
+    
+            puts "esto es group despues #{@project.group}"
+          end
+        end
       else
         render :edit
       end
@@ -84,7 +104,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :group)
+      params.require(:project).permit(:name, :group, :department, :notification_day)
     end
 
     def show_history

@@ -4,8 +4,16 @@ class User < ActiveRecord::Base
 
   before_save :create_permalink, if: :new_record?
   rolify
-  validates_presence_of :name, :email
+  # validates_presence_of :name, :last_name, :identification, :email, :password, :password_confirmation, :birthdate, :phone, :address 
   after_create :role_automatic
+
+
+
+
+  
+          
+        
+
 
   # has_many :posts, dependent: :destroy relation posts
 

@@ -15,13 +15,21 @@ module Admin
     end
 
     def new
-      @user = User.new
+      if current_user.roles.ids == [1]
+        redirect_to admin_users_path
+      else
+           @user = User.new
+      end
+
     end
 
     def show
     end
 
     def edit
+       if current_user.id != @user.id
+        redirect_to admin_users_path
+       end
     end
 
     def update
@@ -68,7 +76,7 @@ module Admin
 
     def user_params
       params.require(:user).permit(
-        :name, :email, :password, :password_confirmation,
+        :name, :email,  :phone, :address, :last_name, :identification, :birthdate, :password, :password_confirmation,
         :role_ids, :encrypted_password
       )
     end

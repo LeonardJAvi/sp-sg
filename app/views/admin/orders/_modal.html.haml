@@ -1,0 +1,5 @@
+.modal{ id: "modal-#{@order.id}"}
+	= form_tag admin_order_path(@order),  method: "PUT" do
+		.modal-header
+			%h4= "order N° - #{@order.id}"
+		.modal-content

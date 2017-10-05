@@ -23,7 +23,7 @@
 				.display-value= @task.cost_dolar
 			%li.list-row
 				.display-label= t("activerecord.attributes.task.phase_id")
-				.display-value= @task.phase_id
+				.display-value= @task.phase.name
 			%li.list-row
 				.display-label= t("activerecord.attributes.task.project")
 				.display-value= @task.phase.project.name

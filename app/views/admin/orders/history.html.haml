@@ -1,0 +1,86 @@
+.wrapper
+	.wrapper-body.container
+		.actions
+		= link_to admin_orders_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+			= material_icon.md_18.arrow_back.css_class("md-dark")
+			
+		= link_to request.original_url+'.pdf', class: "btn-floating right btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
+			= material_icon.md_18.description.css_class("md-dark")
+			
+		.card
+			.card-content
+				%ul.list
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.id")
+						.display-value.fs-body-1.tc-black-2= @order.id.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.name_client")
+						.display-value.fs-body-1.tc-black-2= @order.name_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.identification_client")
+						.display-value.fs-body-1.tc-black-2= @order.identification_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.phone_client")
+						.display-value.fs-body-1.tc-black-2= @order.phone_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.email_client")
+						.display-value.fs-body-1.tc-black-2= @order.email_client.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_planned")
+						.display-value.fs-body-1.tc-black-2= @order.date_start_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_start_real")
+						.display-value.fs-body-1.tc-black-2= @order.date_start_real.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_planned")
+						.display-value.fs-body-1.tc-black-2= @order.date_end_planned.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_end_real")
+						.display-value.fs-body-1.tc-black-2= @order.date_end_real.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_pause")
+						.display-value.fs-body-1.tc-black-2= @order.date_pause.to_s.humanize
+					-# %li.list-row
+					-# 	.display-label= t("activerecord.attributes.#{controller_name.singularize}.state")
+					-# 	.display-value.fs-body-1.tc-black-2= @order.state.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.payment_currency")
+						.display-value.fs-body-1.tc-black-2= @order.payment_currency.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.price_project")
+						.display-value.fs-body-1.tc-black-2= @order.price_project.to_s.humanize
+					%li.list-row
+						.display-label= t("activerecord.attributes.#{controller_name.singularize}.project_id")
+						.display-value.fs-body-1.tc-black-2= @order.project_id.to_s.humanize
+
+					%table.responsive-table
+						%thead
+							%tr
+								%th Number Phases
+								%th Item Phases
+								%th Cost 
+								%th Price
+						%tbody
+							-cont = 0
+							-@order.project.phases.each do |phase|
+								-cont = cont+1
+								%tr
+									%td
+										=cont
+									%td
+										=phase.name
+									-# -if @order.payment_currency == "bolvares"
+										%td
+											
+											=phase.task.cost_bolivar
+										%td
+											=phase.task.price_bolivar
+
+									-if @order.payment_currency == "dolares"
+										%td
+											=phase.task.cost_dolar
+										%td
+											=phase.task.price_dolar
+									
+
+
