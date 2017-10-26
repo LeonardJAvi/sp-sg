@@ -27,7 +27,8 @@ module Admin
       respond_to do |format|
         format.html
         format.json
-        format.pdf {render template: 'admin/orders/history_pdf', pdf: 'Report_orders'}
+        format.pdf {render template: 'admin/orders/history_pdf', pdf: 'Report_orders', 
+        tamaño_página: 'A4', font_size: '10px', layout: false, margin: {left: 0 , right: 0}  }
       end
     end
 
@@ -51,13 +52,16 @@ module Admin
       $total_bolivar = @@count_bolivar 
       $total_dolar = @@count_dolar 
     end 
-    def report_order   
+
+    def search_order   
       @order = Order.new
     end
 
-    def search_report   
-      $parametro = @order = Order.new(order_params)
+    def create_report
+      $bandera = "1"
       @orders = Order.all
+      $parametro = @order = Order.new(order_params)
+      redirect_to search_order_admin_orders_path
     end
     
     # GET /orders/new
@@ -84,7 +88,7 @@ module Admin
       if @order.payment_currency == "1"
         @order.price_project = $total_dolar
       elsif @order.payment_currency == "2"
-        @order.payment_currency = $total_bolivar
+        @order.price_project = $total_bolivar
       end
       if @order.save
         redirect(@order, params)
@@ -135,7 +139,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause, :stack_state_id, :payment_currency, :price_project,:cost_project, :observations, :project_id)
+      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause, :stack_state_id, :payment_currency, :price_project,:cost_project, :observation, :project_id)
     end
 
     def show_history

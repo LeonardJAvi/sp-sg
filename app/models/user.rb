@@ -7,14 +7,6 @@ class User < ActiveRecord::Base
   # validates_presence_of :name, :last_name, :identification, :email, :password, :password_confirmation, :birthdate, :phone, :address 
   after_create :role_automatic
 
-
-
-
-  
-          
-        
-
-
   # has_many :posts, dependent: :destroy relation posts
 
   # Include default devise modules. Others available are:
@@ -29,6 +21,17 @@ class User < ActiveRecord::Base
   def role_automatic
     self.role_ids = "1"
   end
+
+
+ #REVISAR ESTO::::::::::::::::::
+ #  def user_rol
+ #    if self.id == 1
+ #       self.role_ids = '1'
+ #    else
+ #       self.role_ids = '2'
+ #    end
+ # end
+ #after_create :user_rol
 
 
   # Get the page number that the object belongs to

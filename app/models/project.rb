@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   has_many :phases
   has_many :orders
   has_many :tasks
+ 
 
   #Field Validation
   #validates :name,presence: { message: "Campos en blanco" }

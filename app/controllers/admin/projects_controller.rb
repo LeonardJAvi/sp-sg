@@ -28,6 +28,7 @@ module Admin
 
     # GET /projects/1/edit
     def edit
+
       @list_project_name = Premium::Article.all.map {|obj| obj.nombre}
     end
 
@@ -60,10 +61,9 @@ module Admin
          @stack_product=Premium::Article.all
         @stack_product.each do |articulo|
           if @project.name == articulo.nombre
-             puts "esto es group antes #{@project.group}"
-            @project.group = "00"
-    
-            puts "esto es group despues #{@project.group}"
+             @project.group = articulo.grupo
+             @project.save
+
           end
         end
       else
@@ -104,7 +104,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name, :group, :department, :notification_day)
+      params.require(:project).permit(:name,:group, :department, :notification_day)
     end
 
     def show_history

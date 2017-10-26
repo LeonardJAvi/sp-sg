@@ -24,7 +24,7 @@
 							= f.input :date_pause, as: :string, input_html: {class: "datepicker"}
 							= f.input :observation
 							-unless ((controller_name == "orders") and (action_name =="new"))
-								= f.input :stackstate_id, collection: @stack_states, label: false, value_method: :id, include_blank: 'Select Project', input_html: {class: "browser-default"} 
+								= f.input :stack_state_id, collection: @stack_states, label: false, value_method: :id, include_blank: 'Select Project', input_html: {class: "browser-default"} 
 							.form-actions.right
 								= f.button :submit, t("keppler.actions.save"), name: '_save'
 								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'

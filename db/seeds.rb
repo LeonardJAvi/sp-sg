@@ -20,6 +20,8 @@ User.create(
   password_confirmation: '12345678', role_ids: '1'
 )
 
+User.create(name: 'renny', email: 'reny@keppler.com', password: '12345678',password_confirmation: '12345678', role_ids: '1')
+
 puts 'admin@keppler.com has been created'
 
 Customize.create(file: "", installed: true)
@@ -62,21 +64,21 @@ puts 'Setting default has been created'
 # puts '****Model Phase****'
 
 
-# Phase.create(name:'Diseño Wireframe', description:'Lorem', project_id:'1')
+# Phase.create(name:'Diseño Wireframe', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Exportación Assest', description:'Lorem', project_id:'1')
+# Phase.create(name:'Exportación Assest', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Redacción de Contenidos', description:'Lorem', project_id:'1')
+# Phase.create(name:'Redacción de Contenidos', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Implementación de Keppler', description:'Lorem', project_id:'1')
+# Phase.create(name:'Implementación de Keppler', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Implementación de Catálogos', description:'Lorem', project_id:'1')
+# Phase.create(name:'Implementación de Catálogos', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Implementación de Pruebas', description:'Lorem', project_id:'1')
+# Phase.create(name:'Implementación de Pruebas', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Carga de Contenidos', description:'Lorem', project_id:'1')
+# Phase.create(name:'Carga de Contenidos', description:'Lorem', project_id:'2')
 
-# Phase.create(name:'Subir a Producción', description:'Lorem', project_id:'1')
+# Phase.create(name:'Subir a Producción', description:'Lorem', project_id:'2')
 
 # puts 'phase has been created'
 

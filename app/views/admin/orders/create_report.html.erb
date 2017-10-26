@@ -2,15 +2,9 @@
 </br>
 </br>
 </br>
-<%= form_for (@order),url: :create_report_admin_orders, method: :post do |f| %>
-		<label>"status"</label>
-		<%=f.text_field :stack_state_id%>
-		<label>"project"</label>
-		<%=f.text_field :project_id%>
-		<%=f.date_field :date_start_real%>
-    	<%=f.date_field :date_end_real%>
- 	   <div class="actions"><%= f.submit "Search" %></div>
-<%end%>
+</br>
+</br>
+</br>
 <%if $bandera == "1"%>
 	<%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
 		<%date_start = $parametro.date_start_real = "11/11/1111"%></br>

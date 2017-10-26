@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       # get '/clone', action: 'clone'
       get '/history', action: 'history'
       get '/search_order', action: :search_order, on: :collection, as: 'search_order'
+      post '/create_report', action: :create_report, on: :collection, as: 'create_report'
       delete(
         action: :destroy_multiple,
         on: :collection,

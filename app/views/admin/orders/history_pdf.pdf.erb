@@ -11,49 +11,36 @@
        <div id="box-center">
           <div id="info">
             <div id="info-1" class="center-flex">
-              <img src="logo.png" id="logo-slice">
+              <%= wicked_pdf_image_tag 'admin/logo-slice.png'%>
             </div>
-            <div id="info-2" class="center-flex">
-
-              <span>CALLE COMERCIO DE CAJA DE AGUA, ESQ. AV. PUMARROSA, EDIF. PUMARROSA PB. PUNTO FIJO, FALCON</span>
-                 <span>PHONE: 02694'166481</span>
-                 <span>EMAIL:INFO@SLICEGROUP.XYZ</span>
+            <div id="info-2" class="center-block">
+                <span>CALLE COMERCIO DE CAJA DE AGUA, ESQ. AV. PUMARROSA, EDIF. PUMARROSA PB. PUNTO FIJO, FALCON</span></br>
+                 <span>TELEFONO: 0269-416-6481</span></br>
+                 <span style="text-transform: none;">CORREO: info@slicegroup.xyz</span>
             </div>
             <div id="info-3" class="center-flex">
-                 <span>TREMONT - MELENDEZ & ASOCIADOS, C.A.</span>
-                 <span>(TREMMELCA)</span>
-                 <span>RIF: J401904939</span>
-                 <span>N° CONTROL</span>
-                 <span>00001</span>
+                 <span>TREMONT - MELENDEZ & ASOCIADOS, C.A.</span></br>
+                 <span>(TREMMELCA)</span></br>
+                 <span>RIF: J-401904939</span></br>
+                 <span>Slice Planner</span>
+
             </div>
           </div>
+        </div>
           <div id="info-client">
-            <div id="client-a" class="center-flex">
-              <span class="item-client" id="line">Name Client: Jose Manuel Alvarez</span>
-              <span class="item-client">Identification Client: V-00.554.323</span>
-              <span class="item-client">Email Client: josa@gmail.com</span>
-              <span class="item-client">Phone Client: 9454-4343-23</span>
-              <span class="item-client">Person Contact: Joseht Perez</span>
+            <div id="client-a">
+              <div class="text-center" style="font-size: 13px; margin-bottom: 2px;">DATOS DEL CLIENTE</div>
+              <span>Nombre: <%=@order.name_client%></span></br>
+              <span>Identificacion: <%=@order.identification_client%></span></br>
+              <span>Correo Electronico: <%=@order.email_client%></span></br>
+              <span>Telefono: <%=@order.phone_client%></span></br>
+              <span>Persona Contacto: <%@order.name_client%></span>
             </div>
             <div id="client-b">
-              <div id="item-a" class="center-flex">
-                <span>Orden de Servicio</span>
-                <span>00001</span>
-              </div>
-              <div id="item-b" class="center-flex">
-                <span>Fecha de Emision</span>
-                <span>0000-00-00</span>
-              </div>
-            </div>
-            <div id="client-c">
-              <div id="item-c" class="center-flex">
-                <span>Name Project</span>
-                <span>Keppler Test</span>
-              </div>
-              <div id="item-d" class="center-flex">
-                <span>Payment Money</span>
-                <span>Dolar</span>
-              </div>
+                <span style="font-size: 15px;">ORDEN DE SERVICIO</span></br>
+                <span style="font-size: 13px;"><%="000#{@order.id}"%></span></br>
+                <span style="font-size: 15px;">FECHA DE EMISION</span></br>
+                <span style="font-size: 13px;"><%=@order.created_at%></span>
             </div>
           </div>
           <div id="box-title-order">
@@ -70,7 +57,6 @@
                       <th>Status Order</th>
                       <th>Name Project</th>
                       <th>Group</th>
-                      <th>Department</th>
                       <th>Planning date start</th>
                       <th>Planning date end</th>
                       <th>Real date start</th>
@@ -79,15 +65,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>Pendient</td>
-                    <td>Keppler Checkin</td>
-                    <td>05</td>
-                    <td>Dev</td>
-                    <td>00-00-000</td>
-                    <td>00-00-000</td>
-                    <td>00-00-000</td>
-                    <td>00-00-000</td>
+                    <td><%="000#{@order.id}"%></td>
+                    <td><%=@order.stack_state.name%></td>
+                    <td><%=@order.project.name%></td>
+                    <td><%=@order.project.group%></td>
+                    <td><%=@order.date_start_planned%></td>
+                    <td><%=@order.date_end_planned%></td>
+                    <td><%=@order.date_start_real%></td>
+                    <td><%=@order.date_end_real%></td>
                   </tr>
                 </tbody>
             </table>
@@ -105,57 +90,43 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <% -cantidad = 0 %>
+                  <% @order.project.phases.each do |phase| %>
+                  <% cantidad = cantidad + 1 %>
                   <tr>
-                    <td>1</td>
-                    <td>Planning</td>
-                    <td>10,00$</td>
+                    <td><%=cantidad%></td>
+                    <td><%=phase.name%></td>
+                    <%if @order.payment_currency == "1"%>
+                      <td><%="#{phase.task.price_dolar} $" %></td>
+                    <%elsif @order.payment_currency == "2"%>
+                      <td><%="#{phase.task.price_bolivar} Bs"%></td>
+                    <%end%>
                   </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Design</td>
-                    <td>15,00$</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Export Assets</td>
-                    <td>20,00$</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Keppler Implementation</td>
-                    <td>11,00$</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Testing</td>
-                    <td>12,00$</td>
-                  </tr>
-                  <tr>
-                    <td>6</td>
-                    <td>Production</td>
-                    <td>20,00$</td>
-                  </tr>
-                  <tr>
-                    <td>* * * * *</td>
-                    <td class="info-text" id="total">Total</td>
-                    <td class="info-text" id="price">60,00$</td>
+                  <%end%>      
+                    <td></td>
+                    <td id="total">Total</td>
+                    <%if @order.payment_currency == "1"%>
+                      <td><%="#{@order.price_project} $" %></td>
+                    <%elsif @order.payment_currency == "2"%>
+                      <td><%="#{@order.price_project} Bs" %></td>
+                    <%end%>
                   </tr>
                 </tbody>
             </table>
           </div>
-          <div id="box-title-info-item-o">
-            <span id="info-text">Observations</span>
+          <div id="box-title-info-item">
+            <span class="info-text">Observations</span>
           </div>
           <div id="box-observations">
-            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum, veritatis repellendus aperiam sed, corporis harum debitis reiciendis officia dicta quos incidunt impedit ea fugit autem ad quisquam vitae nulla laboriosam!</span>
+            <span><%=@order.observation%></span>
           </div>
           <div id="box-title-responsable" class="center-flex">
-             <span>____________________________________</span>
-             <span>Eduardo Meledez</span>
-             <span>Ordenante</span>
-             <span>Lider de Operaciones - Slice Group</span>
-             <div id="logo-firm" class="center-flex">
-               <img src="planner.png" id="logo-center">
+             <span>_____________________________</span><br>
+             <span><%="#{@current_user.name} #{@current_user.last_name}"%></span><br>
+             <span>Ordenante</span><br>
+             <span>Lider de Operaciones - Slice Group</span><br>
+             <div id="logo-firm">
+                 <%= wicked_pdf_image_tag 'admin/planner.png'%>
              </div>
           </div>
      </div>
@@ -177,7 +148,6 @@
     height: 100%;
     float: left;
     position: relative;
-    border: 1px solid black;
     margin-left: 5%;
   }
   #item-b{
@@ -188,7 +158,7 @@
     border: 1px solid black;
   }
   #item-c{
-        width: 45%;
+    width: 45%;
     height: 86%;
     float: left;
     position: relative;
@@ -197,7 +167,7 @@
     margin-top: 1%;
   }
   #item-d{
-         width: 45%;
+    width: 45%;
     height: 86%;
     float: left;
     position: relative;
@@ -213,7 +183,6 @@
   }
   #box-center {
     width: 100%;
-    /* height: auto; */
     margin-top: 20px;
     text-align: center;
     position: relative;
@@ -228,24 +197,30 @@
     border-top: 1px solid black;
   }
   #info-client{
-   
     height: 120px;
     width: 100%;
     position: relative;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
   }
   #logo-firm{
-    width: 200px;
-    height: 100px;
+    width: 100%;
+    height: 80px;
     position: relative;
     margin-bottom: 15px;
     margin-top: 15px;
   }
+  
+  #logo-firm > img {
+    margin: 0;
+    padding: 0;
+    height: 60%;
+  }
+
   #box-title-order{
     width: 100%;
     position: relative;
     margin-bottom: 15px;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
@@ -255,7 +230,7 @@
     width: 100%;
     position: relative;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
@@ -273,7 +248,7 @@
   }
   #box-observations{
     width: 100%;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 300;
     text-align: justify;
     color: black;
@@ -289,37 +264,42 @@
     opacity: 0.2;
     transform: translateX(-50%);
   }
+
   #box-title-responsable{
     width: 100%;
     position: relative;
-    margin-bottom: 15px;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     text-transform: uppercase;
     color: black;
-    margin-top: 100px;
+    margin-top: 15px;
   }
+
   #client-a{
     height: 100%;
-    width: 50%;
+    width: 45%;
     position: relative;
     float: left; 
+    padding: 10px;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
   }
+
   #client-b{
-     height: 50%;
-    width: 50%;
-    position: relative; 
-    float: right;
-    top: 2px;
-  }
-  #client-c{
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 45%;
     position: relative;
-    float: right;
-    top: 2px;
+    float: right; 
+    padding: 20px;
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+    text-align: center;
   }
+
   #table-project{
     height: auto;
     width: 100%;
@@ -327,40 +307,47 @@
   }
   #info-1 {
     height: 100%;
-    width: 20%;
-   
+    width: 20%;   
     position: absolute; 
-   }
+  }
+
+  #info-1 > img {
+    margin: 0;
+    padding: 0;
+    height: 70%;
+  }
+
   #info-2{
     width: 40%;
     height: 100%;
-   
     position: absolute;
-    margin-left: 20%;
-    padding-left: 15px;
-    padding-right: 15px;
+    margin-left: 22%;
+    padding-left: 5px;
+    padding-right: 5px;
     color: black;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
   }
+
   #info-3{
     width: 40%;
     height: 100%;
-    
     position: absolute;
     margin-left: 60%;
     padding-left: 15px;
     padding-right: 15px;
     color: black;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
   }
+
   img#logo-slice{
     width: 100%;
     margin: 0;
     padding: 0;
     height: 100%;
   }
+
   img#logo-center{
     width: 100%;
     margin: 0;
@@ -368,35 +355,32 @@
     height: 100%;
     opacity: 0.5;
   }
+
   img#mask-logo{
     width: 100%;
     margin: 0;
     padding: 0;
     height: 100%;
   }
-  span.item-client{
-    justify-content: initial;
-    border-bottom: 1px solid black;
-    width: 100%;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    text-align: left;
-    padding-right: 20px;
-    padding-left: 20px;
-    color: black;
-    font-size: 16px;
+
+  td#totadl{
+    font-size: 14px;
+    text-transform: uppercase;
     font-weight: bold;
   }
-   tr > th {
+
+  tr > th {
     text-align: center !important;
     text-transform: uppercase !important;
     font-size: 12px;
   }
   .table-bordered > tbody > tr > td{
     border: 1px solid black;
+    font-size: 8px;
   }
   .table > thead:first-child > tr:first-child > th{
     border: 1px solid black;
+    font-size: 8px;
   }
   .info-text{
     text-transform: uppercase;

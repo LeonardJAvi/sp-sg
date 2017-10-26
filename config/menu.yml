@@ -23,7 +23,7 @@ menu:
   #   url_path: /admin/google_analytics_tracks
   #   icon: insert_chart
   #   current: ['admin/google_analytics_tracks']
-  #   model: GoogleAnalyticsTrack
+  #   model: GoogleAnalyticsTrack <i class="material-icons">assignment</i> 
   project:
     name: projects
     url_path: /admin/projects
@@ -33,7 +33,7 @@ menu:
   phase:
     name: phases
     url_path: /admin/phases
-    icon: check_box
+    icon: near_me
     current: ['admin/phases']
     model: Phase
   task:
@@ -66,6 +66,16 @@ menu:
     icon: account_circle
     current: ["admin/users"]
     model: User
+  report:
+    name: Reports
+    icon: description
+    current: ['admin/reports']
+    model: Order
+    submenu:
+      - order:
+          name: Report General
+          url_path: /admin/orders/search_order
+          current: ['admin/orders/search_order']
   # customize:
   #   name: keppler design
   #   icon: color_lens

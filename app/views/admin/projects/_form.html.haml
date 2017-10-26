@@ -9,13 +9,7 @@
 					= simple_form_for [:admin, @project] do |f|
 						.row
 							= f.input :name, collection: @list_project_name, label: false,include_blank: 'Select Project', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
-							= f.input :department, collection: @type_department, label: false,include_blank: 'Select Department', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
 							= f.input :notification_day
-
-
-							-# = f.input :name, collection: @stack_product.map {|obj| obj.nombre}, label: false,include_blank: 'Select Project', input_html: { class: "browser-default",  style:"margin-bottom: 5px;" }
-							-# = f.input :group
-
 							.form-actions.right
 								= f.button :submit, t("keppler.actions.save"), name: '_save'
 								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'

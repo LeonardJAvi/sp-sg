@@ -1,5 +1,9 @@
+%h2 sddddddddddddddddddddddd
 .modal{ id: "modal-#{@order.id}"}
 	= form_tag admin_order_path(@order),  method: "PUT" do
 		.modal-header
 			%h4= "order N° - #{@order.id}"
 		.modal-content
+			-StackState.all.each do |state|
+				=state.name
+				%h2 sddddddddddddddddddddddd

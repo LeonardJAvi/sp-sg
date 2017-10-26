@@ -13,6 +13,10 @@
 		= link_to "", admin_project_path(project, search: @query), remote: true, class: "show-row"
 		%span
 			= project.group
+	%td{style:"width: 30%"}
+		= link_to "", admin_project_path(project, search: @query), remote: true, class: "show-row"
+		%span
+			= project.notification_day
 	- if can? :clone, Project
 		%td{style:"width: 5%"}
 			-# = link_to admin_project_clone_path(project), class: "btn-floating waves-effect btn-flat" do
