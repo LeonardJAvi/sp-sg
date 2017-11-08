@@ -3,6 +3,12 @@ module Admin
   class ProjectsController < AdminController
     before_action :set_project, only: [:show, :edit, :update, :destroy]
     before_action :show_history, only: [:index]
+    #person
+    before_action :premium
+
+    def premium
+       @list_project_name = Premium::Article.all.map {|obj| obj.nombre}
+    end
 
     # GET /projects
     def index
@@ -22,14 +28,13 @@ module Admin
     # GET /projects/new
     def new
       @project = Project.new  
-      @list_project_name = Premium::Article.all.map {|obj| obj.nombre}
-      @type_department = [ 'Dev', 'Social', 'Brand', 'Tech'] 
+      #@list_project_name = Premium::Article.all.map {|obj| obj.nombre}
     end
 
     # GET /projects/1/edit
     def edit
 
-      @list_project_name = Premium::Article.all.map {|obj| obj.nombre}
+      #@list_project_name = Premium::Article.all.map {|obj| obj.nombre}
     end
 
     # POST /projects
@@ -53,12 +58,9 @@ module Admin
 
     # PATCH/PUT /projects/1
     def update
-
       if @project.update(project_params)
-       
         redirect(@project, params)
-
-         @stack_product=Premium::Article.all
+        @stack_product=Premium::Article.all
         @stack_product.each do |articulo|
           if @project.name == articulo.nombre
              @project.group = articulo.grupo
@@ -73,7 +75,6 @@ module Admin
 
     def clone
       @project = Project.clone_record params[:project_id]
-
       if @project.save
         redirect_to admin_projects_path
       else
@@ -104,7 +105,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def project_params
-      params.require(:project).permit(:name,:group, :department, :notification_day)
+      params.require(:project).permit(:name,:group)
     end
 
     def show_history

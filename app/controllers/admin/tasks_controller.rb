@@ -3,6 +3,11 @@ module Admin
   class TasksController < AdminController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
     before_action :show_history, only: [:index]
+    before_action :select_phase
+
+    def select_phase
+       @projects = Project.all
+    end
 
     # GET /tasks
     def index
@@ -22,12 +27,10 @@ module Admin
     # GET /tasks/new
     def new
       @task = Task.new
-      @projects = Project.all
     end
 
     # GET /tasks/1/edit
     def edit
-      @projects = Project.all
     end
 
     # POST /tasks
@@ -103,7 +106,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:price_bolivar, :price_dolar, :cost_bolivar, :cost_dolar, :name, :number_hours, :phase_id)
+      params.require(:task).permit(:price_bolivar, :price_dolar, :cost_bolivar, :cost_dolar, :number_hours, :phase_id)
     end
 
     def show_history

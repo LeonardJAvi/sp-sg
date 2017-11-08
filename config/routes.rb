@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: KepplerConfiguration.skip_module_devise
 
   namespace :admin do
-    resources :stack_states do
+    resources :stack_states, except: [:destroy] do
       get '(page/:page)', action: :index, on: :collection, as: ''
       get '/clone', action: 'clone'
       delete(
@@ -15,10 +15,11 @@ Rails.application.routes.draw do
       )
     end
 
-    resources :orders do
+    resources :orders, except: [:destroy] do
       get '(page/:page)', action: :index, on: :collection, as: ''
       # get '/clone', action: 'clone'
       get '/history', action: 'history'
+      get '/edition', action: 'edition'
       get '/search_order', action: :search_order, on: :collection, as: 'search_order'
       post '/create_report', action: :create_report, on: :collection, as: 'create_report'
       delete(
@@ -42,7 +43,7 @@ Rails.application.routes.draw do
     #   )
     # end
 
-    resources :tasks do
+    resources :tasks, except: [:destroy] do
       get '(page/:page)', action: :index, on: :collection, as: ''
       get '/clone', action: 'clone'
       delete(
@@ -52,7 +53,7 @@ Rails.application.routes.draw do
       )
     end
 
-    resources :phases do
+    resources :phases, except: [:destroy] do
       get '(page/:page)', action: :index, on: :collection, as: ''
       get '/clone', action: 'clone'
       delete(
@@ -62,7 +63,7 @@ Rails.application.routes.draw do
       )
     end
 
-    resources :projects do
+    resources :projects, except: [:destroy] do
       get '(page/:page)', action: :index, on: :collection, as: ''
       get '/clone', action: 'clone'
       delete(
@@ -85,7 +86,7 @@ Rails.application.routes.draw do
 
     root to: 'admin#root'
 
-    resources :users do
+    resources :users, except: [:destroy] do
       get '(page/:page)', action: :index, on: :collection, as: ''
       delete(
         '/destroy_multiple',

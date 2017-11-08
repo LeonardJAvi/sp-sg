@@ -112,12 +112,17 @@ ActiveRecord::Schema.define(version: 20170917202342) do
     t.date     "date_start_real"
     t.date     "date_end_real"
     t.date     "date_pause"
+    t.date     "date_notification"
     t.string   "payment_currency",      limit: 255
     t.float    "price_project",         limit: 24
     t.string   "user_responsible",      limit: 255
     t.string   "project_id",            limit: 255
     t.string   "stack_state_id",        limit: 255
     t.string   "observation",           limit: 255
+    t.float    "cost_project",          limit: 24
+    t.string   "person_contact",        limit: 255
+    t.string   "email_contact",         limit: 255
+    t.string   "phone_contact",         limit: 255
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
   end
@@ -131,11 +136,10 @@ ActiveRecord::Schema.define(version: 20170917202342) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",             limit: 255
-    t.string   "group",            limit: 255
-    t.integer  "notification_day", limit: 4
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.string   "name",       limit: 255
+    t.string   "group",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "roles", force: :cascade do |t|

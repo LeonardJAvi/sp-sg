@@ -1,22 +1,57 @@
 %tr{ id: "row-#{order.id}" }
 	-# - if can? :destroy_multiple, Order
-	-# 	%td.item-check{style:"width: 10%"}
-	-# 		= link_to "", admin_order_path(order), remote: true, class: "show-row"
-	-# 		%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{order.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{order.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
-	-# 		%label{ for: "checkbox-#{order.id}" }
-	%td{style:"width: 1%"}
-	%td{style:"width: 10%"}
+	-#  %td.item-check{style:"width: 10%"}
+	-#      = link_to "", admin_order_path(order), remote: true, class: "show-row"
+	-#      %input{ type:"checkbox", class: "filled-in", id: "checkbox-#{order.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{order.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
+	-#      %label{ for: "checkbox-#{order.id}" }
+	%td{style:"width: 2%"}
+	%td{style:"width: 5%"}
 		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
 		%span
 			= order.name_client
-	%td{style:"width: 10%"}
+	%td{style:"width: 5%"}
 		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
 		%span
 			= order.identification_client
-	-# - if can? :clone, Order
-	-# 	%td{style:"width: 5%"}
-	-# 		= link_to admin_order_clone_path(order), class: "btn-floating waves-effect btn-flat" do
-	-# 			= material_icon.md_24.content_copy.css_class("md-dark")
+	%td{style:"width: 10%"}
+		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
+		%span
+			= order.project.name
 	%td{style:"width: 5%"}
+		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
+		%span
+			= order.date_start_planned
+	%td{style:"width: 5%"}
+		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
+		%span
+			= order.stack_state.name
+	%td{style:"width: 2%"}
+		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
+		%span
+	%td{style:"width: 30%"}
+		= link_to "", admin_order_path(order, search: @query), remote: true, class: "show-row"
+		%span
+			-date_server = Date.parse(Time.now.strftime("%d/%m/%Y"))
+			-date_end = (Date.parse(order.date_notification.strftime("%d/%m/%Y")))
+			
+			-if (date_server >= date_end)  
+				.notification
+					= order.date_notification #esta es la notification de los dias
+
+	
+	-# - if can? :clone, Order
+	-#  %td{style:"width: 5%"}
+	-#      = link_to admin_order_clone_path(order), class: "btn-floating waves-effect btn-flat" do
+	-#          = material_icon.md_24.content_copy.css_class("md-dark")
+	%td{style:"width: 4%"}
 		= link_to admin_order_path(order), class: "btn-floating waves-effect btn-flat" do
-			= material_icon.md_24.more_horiz.css_class("md-dark")
+			= material_icon.md_24.visibility.css_class("md-dark")
+	%td{style:"width: 4%"}
+		= link_to admin_order_history_path(order), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.search.css_class("md-dark")
+	%td{style:"width: 4%"}
+		= link_to admin_order_edition_path(order), class: "btn-floating waves-effect btn-flat" do
+			= material_icon.md_24.edit.css_class("md-dark")
+
+
+

@@ -4,7 +4,7 @@
 	-# 		= link_to "", admin_task_path(task), remote: true, class: "show-row"
 	-# 		%input{ type:"checkbox", class: "filled-in", id: "checkbox-#{task.id}", 'checklist-model'=>"check", 'checklist-value'=>"#{task.id}", "ng-click"=>"selectByCheck(#{@objects.size})"}
 	-# 		%label{ for: "checkbox-#{task.id}" }
-	%td{style:"width: 1%"}
+	%td{style:"width: 2%"}
 	%td{style:"width: 15%"}
 		= link_to "", admin_task_path(task, search: @query), remote: true, class: "show-row"
 		%span
@@ -33,6 +33,6 @@
 		-# %td{style:"width: 5%"}
 		-#  = link_to admin_task_clone_path(task), class: "btn-floating waves-effect btn-flat" do
 		-#      = material_icon.md_24.content_copy.css_class("md-dark")
-	%td{style:"width: 5%"}
+	%td{style:"width: 6%"}
 		= link_to admin_task_path(task), class: "btn-floating waves-effect btn-flat" do
-			= material_icon.md_24.more_horiz.css_class("md-dark")
+			= material_icon.md_24.visibility.css_class("md-dark")

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>correo</title>
+</head>
+<body>
+	<strong>Estimado: </strong><%="#{@user.name} #{@user.last_name}"%></br>
+	<%if @user.rol =="admin"%>
+		<%="Usted formara parte de Slice Group como Admininistrador de proyectos"%>
+	<%elsif @user.rol =="pending"%>
+		<%="Usted se encuentra en lista de espera, pronto sera asignado a un area de trabajo"%>
+	<%elsif @user.rol =="bloqueado"%>
+		<%="Usted ha sido bloqueado de Slice Group, por favor pongase en contacto con la empresa"%>
+	<%end%>
+</body>
+</html>

@@ -36,9 +36,11 @@ module Admin
       update_attributes = user_params.delete_if do |_, value|
         value.blank?
       end
+      @user.before_rol = (@user.rol)
 
       if @user.update_attributes(update_attributes)
         redirect(@user, params)
+      @user.after_rol = (@user.rol)
       else
         render action: 'edit'
       end
@@ -76,7 +78,7 @@ module Admin
 
     def user_params
       params.require(:user).permit(
-        :name, :email,  :phone, :address, :last_name, :identification, :birthdate, :password, :password_confirmation,
+        :name, :email,:notification_day,  :phone, :address, :last_name, :identification, :birthdate, :password, :password_confirmation,
         :role_ids, :encrypted_password
       )
     end

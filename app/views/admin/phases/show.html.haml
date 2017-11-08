@@ -2,9 +2,9 @@
 .wrapper
 	.wrapper-body.container
 		.actions
-			- if can? :delete, Phase
-				= link_to admin_phase_path(@phase), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
-					= material_icon.md_18.delete.css_class("md-dark")
+			-# - if can? :delete, Phase
+			-# 	= link_to admin_phase_path(@phase), class: "btn-floating btn-flat right tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.delete"), method: :delete, data: { confirm: t("keppler.messages.data_confirm") } do
+			-# 		= material_icon.md_18.delete.css_class("md-dark")
 			- if can? :update, Phase
 				= link_to edit_admin_phase_path(@phase), class: "right btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" =>t("keppler.actions.edit") do
 					= material_icon.md_18.create.css_class("md-dark")

@@ -1,9 +1,16 @@
-%h2 sddddddddddddddddddddddd
 .modal{ id: "modal-#{@order.id}"}
 	= form_tag admin_order_path(@order),  method: "PUT" do
 		.modal-header
-			%h4= "order N° - #{@order.id}"
+			%h4= "Order N° - #{@order.id}"
 		.modal-content
-			-StackState.all.each do |state|
-				=state.name
-				%h2 sddddddddddddddddddddddd
+			- StackState.all.each do |stackstate|
+				.radio-button
+					-if stackstate.id.to_i > @order.stack_state_id.to_i
+						= radio_button_tag "order[stack_state_id]", stackstate.id, false, class: "radio-button__input", id: "radio#{stackstate.id}", :type => "radio", :value => "#{stackstate.id}", :checked => @order.stack_state_id?
+						= label_tag "order[stack_state_id]", stackstate.name.humanize, class: "radio-button__label", :for => "radio#{stackstate.id}"
+			="Observation"
+			= text_area_tag "order[observation]"
+		.modal-footer
+			.actions
+				= button_tag t('keppler.actions.assign state'), :class => "waves-effect waves-light btn", name: '_save'
+				= link_to t('keppler.actions.cancel'), "", class: "modal-action modal-close waves-effect waves-light btn blue", style: "margin-right:10px;"

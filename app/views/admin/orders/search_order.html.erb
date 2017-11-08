@@ -2,19 +2,18 @@
 </br>
 </br>
 </br>
-<%= form_for (@order),url: :create_report_admin_orders, method: :post do |f| %>
-		<label>"status"</label>
-		<%=f.text_field :stack_state_id%>
-		<label>"project"</label>
-		<%=f.text_field :project_id%>
-		<%=f.date_field :date_start_real%>
-    	<%=f.date_field :date_end_real%>
+<%= simple_form_for (@order),url: :create_report_admin_orders, method: :post do |f| %>
+	
+		<%=f.input :stack_state_id, collection: StackState.all,input_html: {style: "margin-botton:px" } %>
+		<%=f.input :project_id, collection: Project.all,input_html: {style: "margin-botton:px" } %>
+		<%=f.input :date_start_real, as: :string, input_html: {class: "datepicker" , style: "margin-botton:px" }%>
+    	<%=f.input :date_end_real, as: :string, input_html: {class: "datepicker" , style: "margin-botton:px" }%>
  	   <div class="actions"><%= f.submit "Search" %></div>
 <%end%>
 <%if $bandera == "1"%>
 	<%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
-		<%date_start = $parametro.date_start_real = "11/11/1111"%></br>
-		<%date_end = $parametro.date_end_real = "11/11/1111"%></br>
+		<%$date_start = $parametro.date_start_real = "11/11/1111"%></br>
+		<%$date_end = $parametro.date_end_real = "11/11/1111"%></br>
 	<%end%>
 
 	<%@orders.each do |order|%>
@@ -23,7 +22,7 @@
 				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
 					<%="si status, si  project, si la fecha  #{order.id}"%></br>
 				
-				<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
 					<%="si status, si  project, no la fecha  #{order.id}"%></br>
 				<%end%>
 			
@@ -32,7 +31,7 @@
 				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
 								<%="si status, no project, si la fecha  #{order.id}"%></br>
 							
-				<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
 								<%="si status, no  project, no la fecha  #{order.id}"%></br>
 				<%end%>
 			<%end%>
@@ -42,7 +41,7 @@
 				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
 					<%="no status, si  project, si la fecha  #{order.id}"%></br>
 				
-				<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
 					<%="no status, si  project, no la fecha  #{order.id}"%></br>
 				<%end%>
 			
@@ -51,7 +50,7 @@
 				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
 								<%="no status, no project, si la fecha  #{order.id}"%></br>
 							
-				<%elsif ($parametro.date_start_real.to_s == date_start) or ($parametro.date_end_real.to_s == date_end)%>
+				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
 								<%="no status, no  project, no la fecha  #{order.id}"%></br>
 				<%end%>
 			<%end%>

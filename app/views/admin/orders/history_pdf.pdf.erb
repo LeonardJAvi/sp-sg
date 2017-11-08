@@ -21,9 +21,7 @@
             <div id="info-3" class="center-flex">
                  <span>TREMONT - MELENDEZ & ASOCIADOS, C.A.</span></br>
                  <span>(TREMMELCA)</span></br>
-                 <span>RIF: J-401904939</span></br>
-                 <span>Slice Planner</span>
-
+                 <span>RIF: J-401904939</span>
             </div>
           </div>
         </div>
@@ -86,6 +84,7 @@
                   <tr>
                       <th>Activity Number</th>
                       <th>Project Activity</th>
+                      <th>Cost of Activity</th>
                       <th>Price of Activity</th>
                   </tr>
                 </thead>
@@ -96,7 +95,9 @@
                   <tr>
                     <td><%=cantidad%></td>
                     <td><%=phase.name%></td>
+                    
                     <%if @order.payment_currency == "1"%>
+                      <td><%="#{phase.task.cost_dolar} $" %></td>
                       <td><%="#{phase.task.price_dolar} $" %></td>
                     <%elsif @order.payment_currency == "2"%>
                       <td><%="#{phase.task.price_bolivar} Bs"%></td>
@@ -104,7 +105,8 @@
                   </tr>
                   <%end%>      
                     <td></td>
-                    <td id="total">Total</td>
+                    <td>Total</td>
+                    <td></td>
                     <%if @order.payment_currency == "1"%>
                       <td><%="#{@order.price_project} $" %></td>
                     <%elsif @order.payment_currency == "2"%>
@@ -124,7 +126,7 @@
              <span>_____________________________</span><br>
              <span><%="#{@current_user.name} #{@current_user.last_name}"%></span><br>
              <span>Ordenante</span><br>
-             <span>Lider de Operaciones - Slice Group</span><br>
+         
              <div id="logo-firm">
                  <%= wicked_pdf_image_tag 'admin/planner.png'%>
              </div>

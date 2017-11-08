@@ -3,6 +3,12 @@ module Admin
   class PhasesController < AdminController
     before_action :set_phase, only: [:show, :edit, :update, :destroy]
     before_action :show_history, only: [:index]
+    #person
+    before_action :select_project
+
+    def select_project
+       @projects = Project.all
+    end
 
     # GET /phases
     def index
@@ -26,12 +32,10 @@ module Admin
     # GET /phases/new
     def new
       @phase = Phase.new
-      @projects = Project.all
     end
 
     # GET /phases/1/edit
     def edit
-      @projects = Project.all
     end
 
     # POST /phases

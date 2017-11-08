@@ -3,7 +3,7 @@ module Admin
   class OrdersController < AdminController
     before_action :set_order, only: [:show, :edit, :update, :destroy]
     before_action :show_history, only: [:index]
-
+    before_action :phase_task_controller
     # GET /orders
     def index
       @q = Order.ransack(params[:q])
@@ -19,6 +19,9 @@ module Admin
     def show
 
     end
+
+    def phase_task_controller
+    end
    
     def history
       @order = Order.find(params[:order_id])
@@ -32,32 +35,60 @@ module Admin
       end
     end
 
+    def edition
+      @order = Order.find(params[:order_id])
+    end
 
     #Peticiones AJAX
     def project
       @project = Project.find(params[:project_id])
-      @@count_bolivar = 0
-      @@count_dolar = 0
+      @@cost_bolivar = 0
+      @@cost_dolar = 0
+      @@price_bolivar = 0
+      @@price_dolar = 0
       @project.phases.each do |phase|
-        bolivar = phase.task.price_bolivar.to_f
-        @@count_bolivar = @@count_bolivar + bolivar
-        dolar = phase.task.price_dolar.to_f
-        @@count_dolar = @@count_dolar + dolar
+        
+        price_bolivar = phase.task.price_bolivar.to_f
+        cost_bolivar = phase.task.cost_bolivar.to_f
+        price_dolar = phase.task.price_dolar.to_f
+        cost_dolar = phase.task.cost_dolar.to_f
+
+        @@price_bolivar = @@price_bolivar + price_bolivar 
+        @@cost_bolivar = @@cost_bolivar + cost_bolivar
+        @@price_dolar = @@price_dolar + price_dolar 
+        @@cost_dolar = @@cost_dolar + cost_dolar
+        
+     
+      
       end
     end   
-     def payment_currency
+
+
+    def payment_currency
       @payment_currency = (params[:payment_currency])
-      @total_bolivar = @@count_bolivar 
-      @total_dolar = @@count_dolar 
-      $total_bolivar = @@count_bolivar 
-      $total_dolar = @@count_dolar 
+      @total_price_bolivar = @@price_bolivar 
+      @total_cost_bolivar = @@cost_bolivar
+      @total_price_dolar = @@price_dolar 
+      @total_cost_dolar = @@cost_dolar
+
+      $total_price_bolivar = @@price_bolivar 
+      $total_cost_bolivar = @@cost_bolivar
+      $total_price_dolar = @@price_dolar 
+      $total_cost_dolar = @@cost_dolar
+
     end 
 
-    def search_order   
+    def search_order   #report
       @order = Order.new
+      # respond_to do |format|
+      #   format.html
+      #   format.pdf {render template: 'admin/asignations/pdf/report', pdf: 'Report_General',
+      #   tamaño_pagina: 'A4', font_size: '10px', layout: false, margin: {left: 0, right: 0}}
+      # end
     end
 
     def create_report
+      @@bandera = 0
       $bandera = "1"
       @orders = Order.all
       $parametro = @order = Order.new(order_params)
@@ -72,6 +103,7 @@ module Admin
       @tasks = Task.all
       @Projects = Project.all
       @type_money = {USD:'1', VEF:'2'} 
+
     end
 
     # GET /orders/1/edit
@@ -81,14 +113,22 @@ module Admin
 
     # POST /orders
     def create
+      
       @order = Order.new(order_params)
       @order.user_responsible = current_user.name
       @stack_state = StackState.all
       @order.stack_state_id = @stack_state = '1'
       if @order.payment_currency == "1"
-        @order.price_project = $total_dolar
+        @order.price_project = $total_price_dolar
+        @order.cost_project = $total_cost_dolar
       elsif @order.payment_currency == "2"
-        @order.price_project = $total_bolivar
+        @order.price_project = $total_price_bolivar
+        @order.cost_project = $total_cost_bolivar
+      end
+      @order.project.phases.each do |phase|
+        if phase.task == nil
+          @order.task = (false)
+        end
       end
       if @order.save
         redirect(@order, params)
@@ -101,6 +141,11 @@ module Admin
     def update
       if @order.update(order_params)
         redirect(@order, params)
+        @order.project.phases.each do |phase|
+          if phase.task == nil
+            @order.task = (false)
+          end
+        end
       else
         render :edit
       end
@@ -139,7 +184,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause, :stack_state_id, :payment_currency, :price_project,:cost_project, :observation, :project_id)
+      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause,:date_notification, :stack_state_id, :payment_currency, :price_project,:cost_project, :observation, :cost_project, :person_contact, :email_contact, :phone_contact,:project_id)
     end
 
     def show_history
@@ -147,3 +192,4 @@ module Admin
     end
   end
 end
+

@@ -13,16 +13,27 @@
 							= f.input :identification_client, label: 'Identification client'
 							= f.input :phone_client, label: 'Phone'
 							= f.input :email_client, label: 'Email'
-							= f.input :payment_currency, collection: @type_money, label: false, include_blank: 'Select Payment Currency', input_html: { class: "browser-default", style:"margin-bottom: 5px;" }      
-							#payment_currency   
-							= f.input :price_project,  label:'Price project', input_html: { type: "text", style:"margin-top: 5px;" }
+							.col.s5{style:"padding: 0px"} 
+								= f.input :payment_currency, collection: @type_money, label: false, include_blank: 'Select Payment Currency', input_html: { class: "browser-default", style:"margin-bottom: 5px;" }    
+							.col.s2{style:"padding: 0px"}
+								.div#money-title{class:"input-field col s12 optional", style:"padding: 0px"}
+									%span{style:"text-transform: uppercase; font-weight: bold;"} Cost / Price   
+							.col.s5
+								.div#money{class:"input-field col s12 optional", style:"padding: 0px"}
+									#payment_currency
 							#price
 							= f.input :date_start_real, label:'Date start real', as: :string, input_html: {class: "datepicker"}
 							= f.input :date_end_real, label:'Date end real', as: :string, input_html: {class: "datepicker"}
 							= f.input :date_start_planned, label:'Date start planned', as: :string, input_html: {class: "datepicker"}
 							= f.input :date_end_planned, label:'Date end planned', as: :string, input_html: {class: "datepicker"}
-							= f.input :date_pause, as: :string, input_html: {class: "datepicker"}
+							-if (controller_name != "orders" and action_name != "new") or (controller_name != "orders" and action_name != "edit")
+								= f.input :date_pause, as: :string, input_html: {class: "datepicker"}
+							= f.input :date_notification, as: :string, input_html: {class: "datepicker"}
+							= f.input :person_contact, label: 'Person Contact'
+							= f.input :email_contact, label: 'Phone Contact'
+							= f.input :phone_contact, label: 'Email Contact'
 							= f.input :observation
+
 							-unless ((controller_name == "orders") and (action_name =="new"))
 								= f.input :stack_state_id, collection: @stack_states, label: false, value_method: :id, include_blank: 'Select Project', input_html: {class: "browser-default"} 
 							.form-actions.right
@@ -30,6 +41,9 @@
 								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'
 						   
 							
+
+   
+
 
 :javascript
 
@@ -50,12 +64,47 @@
 			});
 		});
 		$('select').material_select();
+		$('.datepicker').pickadate ({
+		   min: new Date(),
+		   selectMonths: true,
+		   yearSelector: false,
+		   hiddenName: true,
+		   selectYears: 1,
+		   editable: false,
+		   firstDay: 1,
+		   format: 'dd/mm/yyyy',
+		   formatSubmit: 'yyyy-mm-dd',
+			
+	   });
+
+	 // Validacion de fecha comienzo real vs fecha de finalizacion real
+	var inicio = $('#order_date_start_real').pickadate(),
+	inicio_picker = inicio.pickadate('picker')
+	var final = $('#order_date_end_real').pickadate(),
+	final_picker = final.pickadate('picker')
+
+	// Check if there’s a “from” or “to” date to start with.
+	if (inicio_picker.get('value')) {
+	 final_picker.set('min', inicio_picker.get('select'))
+	}
+	if (final_picker.get('value')) {
+	 inicio_picker.set('max', final_picker.get('select'))
+	}
+	// When something is selected, update the “from” and “to” limits.
+	inicio_picker.on('set', function(event) {
+	 if (event.select) {
+	  final_picker.set('min', inicio_picker.get('select'))
+	 } else if ('clear' in event) {
+	  final_picker.set('min', false)
+	 }
+	})
+	final_picker.on('set', function(event) {
+	 if (event.select) {
+	  inicio_picker.set('max', final_picker.get('select'))
+	 } else if ('clear' in event) {
+	  inicio_picker.set('max', false)
+	 }
+	})
+
+
 	});
-
-
-
-		
-
-	
-     
-

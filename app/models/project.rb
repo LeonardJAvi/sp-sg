@@ -8,8 +8,8 @@ class Project < ActiveRecord::Base
  
 
   #Field Validation
-  #validates :name,presence: { message: "Campos en blanco" }
-  #validates :name, uniqueness: { message: "El nombre ya se encuentra registrado" }
+  validates :name, presence: :true
+  validates :name, uniqueness: { message: "El nombre ya se encuentra registrado" }
 
   
   # Fields for the search form in the navbar

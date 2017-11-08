@@ -85,6 +85,8 @@ group :development, :test do
   gem 'scss_lint', require: false
 end
 
+gem "letter_opener", :group => :development
+
 #---- keppler_ga_dashboard ----
 gem 'keppler_ga_dashboard', git: 'https://github.com/SliceDevelopers/keppler_ga_dashboard.git', tag: "1.0.0"
 gem 'google-api-client', '~> 0.7.1'

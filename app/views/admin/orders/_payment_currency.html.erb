@@ -1,7 +1,7 @@
 <div id="payment_currency">
 	<%if payment_currency == "1"%>
-		<%="#{@total_dolar} $"%>
+		<span><%="#{@total_cost_dolar} $"%> / <%="#{@total_price_dolar} $"%></span> 
 	<%elsif payment_currency == "2"%>
-		<%="#{@total_bolivar} Bs.F"%>
+	   <span><%="#{@total_cost_bolivar} Bs.F"%> / <%="#{@total_price_bolivar} Bs.F"%></span>
 	<%end%>
 </div>

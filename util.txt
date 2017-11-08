@@ -19,7 +19,7 @@ create_table "orders", force: :cascade do |t|
   end
 
 
-  --------
+  --------visibility
 
   class CreateOrders < ActiveRecord::Migration
   def change
@@ -42,6 +42,38 @@ create_table "orders", force: :cascade do |t|
     end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layaout original con cdn materialize.js
+---
+%head
+  %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+  %link{href:'http://fonts.googleapis.com/css?family=Patua+One', rel:'stylesheet', type:'text/css'}
+  %title= content_for?(:title) ? yield(:title) : 'Keppler Admin'
+  = stylesheet_link_tag 'admin/application', media: 'all'
+  = javascript_include_tag 'admin/application', 'data-turbolinks-track' => true
+  = javascript_include_tag 'http://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js'
+  = csrf_meta_tags
+  = favicon_link_tag "admin/favicon.png"
+
+---
 
 
 
