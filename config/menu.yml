@@ -60,12 +60,6 @@ menu:
     icon: storage
     current: ['admin/stack_states']
     model: StackState
-  user:
-    name: users
-    url_path: /admin/users
-    icon: account_circle
-    current: ["admin/users"]
-    model: User
   report:
     name: Reports
     icon: description
@@ -76,6 +70,12 @@ menu:
           name: Report General
           url_path: /admin/orders/search_order
           current: ['admin/orders/search_order']
+  user:
+    name: users
+    url_path: /admin/users
+    icon: account_circle
+    current: ["admin/users"]
+    model: User
   # customize:
   #   name: keppler design
   #   icon: color_lens

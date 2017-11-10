@@ -80,16 +80,18 @@ module Admin
 
     def search_order   #report
       @order = Order.new
-      # respond_to do |format|
-      #   format.html
-      #   format.pdf {render template: 'admin/asignations/pdf/report', pdf: 'Report_General',
-      #   tamaño_pagina: 'A4', font_size: '10px', layout: false, margin: {left: 0, right: 0}}
-      # end
+      respond_to do |format|
+         format.html
+         format.pdf {render template: 'admin/orders/pdf/report', pdf: 'Report_General',
+         tamaño_pagina: 'A4', font_size: '10px', layout: false, margin: {left: 0, right: 0}}
+       end
+       $bandera = 0
     end
 
     def create_report
       @@bandera = 0
       $bandera = "1"
+      $pdf = $bandera
       @orders = Order.all
       $parametro = @order = Order.new(order_params)
       redirect_to search_order_admin_orders_path

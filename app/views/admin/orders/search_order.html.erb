@@ -1,61 +1,101 @@
-</br>
-</br>
-</br>
-</br>
-<%= simple_form_for (@order),url: :create_report_admin_orders, method: :post do |f| %>
-	
-		<%=f.input :stack_state_id, collection: StackState.all,input_html: {style: "margin-botton:px" } %>
-		<%=f.input :project_id, collection: Project.all,input_html: {style: "margin-botton:px" } %>
-		<%=f.input :date_start_real, as: :string, input_html: {class: "datepicker" , style: "margin-botton:px" }%>
-    	<%=f.input :date_end_real, as: :string, input_html: {class: "datepicker" , style: "margin-botton:px" }%>
- 	   <div class="actions"><%= f.submit "Search" %></div>
-<%end%>
-<%if $bandera == "1"%>
-	<%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
-		<%$date_start = $parametro.date_start_real = "11/11/1111"%></br>
-		<%$date_end = $parametro.date_end_real = "11/11/1111"%></br>
-	<%end%>
-
-	<%@orders.each do |order|%>
-		<%if $parametro.stack_state == order.stack_state%>
-			<%if $parametro.project == order.project%>
-				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
-					<%="si status, si  project, si la fecha  #{order.id}"%></br>
-				
-				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
-					<%="si status, si  project, no la fecha  #{order.id}"%></br>
-				<%end%>
-			
-
-			<%elsif $parametro.project == nil%>
-				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
-								<%="si status, no project, si la fecha  #{order.id}"%></br>
-							
-				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
-								<%="si status, no  project, no la fecha  #{order.id}"%></br>
-				<%end%>
-			<%end%>
-
-		<%elsif $parametro.stack_state == nil%>
-			<%if $parametro.project == order.project%>
-				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
-					<%="no status, si  project, si la fecha  #{order.id}"%></br>
-				
-				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
-					<%="no status, si  project, no la fecha  #{order.id}"%></br>
-				<%end%>
-			
-
-			<%elsif $parametro.project == nil%>
-				<%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
-								<%="no status, no project, si la fecha  #{order.id}"%></br>
-							
-				<%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
-								<%="no status, no  project, no la fecha  #{order.id}"%></br>
-				<%end%>
-			<%end%>
-
-		<%end%>
-
-	<%end%>
-<%end%>
+<div class="wrapper">
+  <div class="wrapper-body container">
+    <div class="actions">
+      <%= link_to admin_orders_path, class: "btn-floating btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do %>
+        <%= material_icon.md_18.arrow_back.css_class("md-dark") %>
+      <% end %>
+      <%= link_to request.original_url+'.pdf', class: "btn-floating right btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do %>
+        <%= material_icon.md_18.description.css_class("md-dark") %>
+      <% end %>
+    </div>
+    <div class="wrapper-inputs">
+      <div class="card">
+        <div class="card-content">
+           <div class="row">
+            <%= simple_form_for (@order),url: :create_report_admin_orders, method: :post do |f| %>
+            <%=f.input :stack_state_id, collection: StackState.all, include_blank: 'Select State',  label: false, input_html: {class:"browser-default", style: "margin-botton: 5px;"}%>
+            <%=f.input :project_id, collection: Project.all, include_blank: 'Select Project',  label: false, input_html: {class:"browser-default", style: "margin-botton: 5px;"}%>
+            <%=f.input :date_start_real, as: :string, input_html: {class: "datepicker", style: "margin-botton:5px;"}%>
+    	    <%=f.input :date_end_real, as: :string, input_html: {class: "datepicker", style: "margin-botton:5px;"}%>
+ 	   	   	<div class="form-actions right">
+                <%=f.button :submit, t("keppler.actions.search"), name: '_save' %>
+            </div> <!-- form-actions right -->
+            <div class="input-field col s12 optional">
+            	<%if $bandera == "1"%>
+  					<%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
+    					<%$date_start = $parametro.date_start_real = "11/11/1111"%>
+    					<%$date_end = $parametro.date_end_real = "11/11/1111"%>
+  					<%end%>
+	  			   <table class="responsive-table centered">
+	  			   	<thead>
+	                    <tr style="text-transform: uppercase;">
+	                      <th>N°</th>
+	                      <th>N° Order.</th>
+	                      <th>Client</th>
+	                      <th>Project</th>
+	                      <th>Price</th>
+	                      <th>Date start real</th>
+	                      <th>Date end real</th>
+	                      <th>Status</th>
+	                    </tr>
+	                  </thead>
+	                  <%num = 0%>
+	                  <%@orders.each do |order|%>
+	                   <%num += 1%>
+	                    <%if $parametro.stack_state == order.stack_state%>
+	                      <%if $parametro.project == order.project%>
+	                        <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+	                        <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+	                          <%a = order%>
+	                        <%end%>
+	                    <%elsif $parametro.project == nil%>
+	                        <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+	                        	<%a = order%>         
+	                        <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+	                            <%a = order%>
+	                        <%end%>
+	                     <%end%>
+	                    <%elsif $parametro.stack_state == nil%>
+	                      <%if $parametro.project == order.project%>
+	                        <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+	                            <%a = order%>
+	                        <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+	                            <%a = order%>
+	                        <%end%>
+	                    <%elsif $parametro.project == nil%>
+	                        <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+	                            <%a = order%>
+	                        <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+	                          <%a = order%>
+	                        <%end%>
+	                    <%end%>
+	                    <%end%>
+	                   <%unless a == nil%>
+	                     <tbody>
+	                       <tr style="text-transform: capitalize;">
+	                            <td><%=num%></td>
+                                <td><%=a.id%></td>
+                                <td><%=a.name_client%></td>
+                                <td><%=a.project.name%></td>
+                                <% if a.payment_currency == "1" %>
+                                <td><%="#{a.price_project} $"%></td>
+                                <%elsif a.payment_currency == "2" %>
+                                <td><%="#{a.price_project}BS"%></td>
+                                <%end%>
+                                <td><%=a.date_start_real%></td>
+                                <td><%=a.date_end_real%></td>
+                                <td><%=a.stack_state.name%></td>
+	                     </tbody>
+	                   <%end%>
+	                  <%end%>
+	  			   </table>
+	  			<%end%>
+            </div><!-- input-field col s12 optional -->
+            <%end%> <!-- simple_form_for (order) -->
+           </div> <!-- row -->
+        </div> <!-- card-content -->
+      </div> <!-- card -->
+    </div> <!-- wrapper-inputs -->
+  </div> <!-- wrapper-body container -->
+</div> <!-- wrapper -->
+          

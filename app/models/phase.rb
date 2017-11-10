@@ -7,7 +7,7 @@ class Phase < ActiveRecord::Base
   validates_associated :task
 
   validates :name,:description, presence: { message: "Campos en blanco" }
-  validates :name, uniqueness: { message: "El nombre ya se encuentra registrado" }
+  # validates :name, uniqueness: { message: "El nombre ya se encuentra registrado" }
 
   # Fields for the search form in the navbar
   def self.search_field

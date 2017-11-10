@@ -87,6 +87,22 @@ Phase.create(name:'Carga de Contenidos', description:'Lorem', project_id:'1')
 
 Phase.create(name:'Subir a Producción', description:'Lorem', project_id:'1')
 
+Phase.create(name:'Diseño Wireframe', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Exportación Assest', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Redacción de Contenidos', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Implementación de Keppler', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Implementación de Catálogos', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Implementación de Pruebas', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Carga de Contenidos', description:'Lorem', project_id:'2')
+
+Phase.create(name:'Subir a Producción', description:'Lorem', project_id:'2')
+
 puts 'phase has been created'
 
 puts '****Model Task****'
@@ -106,6 +122,24 @@ Task.create(number_hours:'15',price_bolivar:'300.00',price_dolar:'30.00',cost_bo
 Task.create(number_hours:'15',price_bolivar:'500.00',price_dolar:'50.00',cost_bolivar:'250.00',cost_dolar:'25.00',phase_id:'7')
 
 Task.create(number_hours:'15',price_bolivar:'800.00',price_dolar:'80.00',cost_bolivar:'400.00',cost_dolar:'40.00',phase_id:'8')
+
+
+
+
+Task.create(number_hours:'15',price_bolivar:'400.00',price_dolar:'40.00',cost_bolivar:'200.00',cost_dolar:'20.00',phase_id:'9')
+
+Task.create(number_hours:'15',price_bolivar:'100.00',price_dolar:'10.00',cost_bolivar:'50.00',cost_dolar:'5.00',phase_id:'10')
+
+Task.create(number_hours:'15',price_bolivar:'600.00',price_dolar:'60.00',cost_bolivar:'300.00',cost_dolar:'30.00',phase_id:'11')
+
+Task.create(number_hours:'15',price_bolivar:'500.00',price_dolar:'50.00',cost_bolivar:'250.00',cost_dolar:'25.00',phase_id:'12')
+
+Task.create(number_hours:'15',price_bolivar:'300.00',price_dolar:'30.00',cost_bolivar:'150.00',cost_dolar:'15.00',phase_id:'12')
+
+Task.create(number_hours:'15',price_bolivar:'300.00',price_dolar:'30.00',cost_bolivar:'150.00',cost_dolar:'15.00',phase_id:'14')
+
+Task.create(number_hours:'15',price_bolivar:'500.00',price_dolar:'50.00',cost_bolivar:'250.00',cost_dolar:'25.00',phase_id:'15')
+
 
 puts 'task has been created'
 

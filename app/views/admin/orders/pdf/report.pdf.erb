@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Order Service - Slice Planner | Slice Group</title>
+	<title>Report Complete - Slice Planner</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 </head>
 <body>
@@ -25,120 +25,95 @@
             </div>
           </div>
         </div>
-          <div id="info-client">
-            <div id="client-a">
-              <div class="text-center" style="font-size: 13px; margin-bottom: 2px;">DATOS DEL CLIENTE</div>
-              <span>Nombre: <%=@order.name_client%></span></br>
-              <span>Identificacion: <%=@order.identification_client%></span></br>
-              <span>Correo Electronico: <%=@order.email_client%></span></br>
-              <span>Telefono: <%=@order.phone_client%></span></br>
-              <span>Persona Contacto: <%@order.name_client%></span>
-            </div>
-            <div id="client-b">
-                <span style="font-size: 15px;">ORDEN DE SERVICIO</span></br>
-                <span style="font-size: 13px;"><%="000#{@order.id}"%></span></br>
-                <span style="font-size: 15px;">FECHA DE EMISION</span></br>
-                <span style="font-size: 13px;"><%=@order.created_at%></span>
-            </div>
+        <div id="box-title-order">
+          <span id="title-order">Order Service Complete</span>
+        </div>
+        <div id="box-title-info-item">
+          <span class="info-text">Reporte al 10/12/2017</span>
           </div>
-          <div id="box-title-order">
-            <span id="title-order">Order Service</span>
-          </div>
-          <div id="box-title-info-item">
-            <span class="info-text">Information Account of Service</span>
-          </div>
-          <div id="table-project">
-            <table class="table table-bordered">
+        <%if $pdf == "1"%>
+            <%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
+                  <%$date_start = $parametro.date_start_real = "11/11/1111"%>
+                  <%$date_end = $parametro.date_end_real = "11/11/1111"%>
+            <%end%>
+        <div id="table-project">
+          <table class="table table-bordered">
                 <thead>
                   <tr>
-                      <th>Numer Order</th>
-                      <th>Status Order</th>
-                      <th>Name Project</th>
-                      <th>Group</th>
-                      <th>Planning date start</th>
-                      <th>Planning date end</th>
-                      <th>Real date start</th>
-                      <th>Real date end</th>
+                    <th>N°</th>
+                    <th>N° Order.</th>
+                    <th>Client</th>
+                    <th>Project</th>
+                    <th>Price</th>
+                    <th>Date start real</th>
+                    <th>Date end real</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
+                 <%num = 0%>
+                    <%@orders.each do |order|%>
+                     <%num += 1%>
+                      <%if $parametro.stack_state == order.stack_state%>
+                        <%if $parametro.project == order.project%>
+                          <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+                          <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+                            <%a = order%>
+                          <%end%>
+                      <%elsif $parametro.project == nil%>
+                          <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+                            <%a = order%>         
+                          <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+                              <%a = order%>
+                          <%end%>
+                       <%end%>
+                      <%elsif $parametro.stack_state == nil%>
+                        <%if $parametro.project == order.project%>
+                          <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+                              <%a = order%>
+                          <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+                              <%a = order%>
+                          <%end%>
+                      <%elsif $parametro.project == nil%>
+                          <%if (Date.parse (order.date_start_real.strftime("%d-%m-%Y"))) >= (Date.parse($parametro.date_start_real.strftime("%d-%m-%Y"))) and (Date.parse(order.date_end_real.strftime("%d-%m-%Y"))) <= (Date.parse($parametro.date_end_real.strftime("%d-%m-%Y")))%>
+                              <%a = order%>
+                          <%elsif ($parametro.date_start_real.to_s == $date_start) or ($parametro.date_end_real.to_s == $date_end)%>
+                            <%a = order%>
+                          <%end%>
+                      <%end%>
+                      <%end%>
+                <%unless a == nil%>
                 <tbody>
                   <tr>
-                    <td><%="000#{@order.id}"%></td>
-                    <td><%=@order.stack_state.name%></td>
-                    <td><%=@order.project.name%></td>
-                    <td><%=@order.project.group%></td>
-                    <td><%=@order.date_start_planned%></td>
-                    <td><%=@order.date_end_planned%></td>
-                    <td><%=@order.date_start_real%></td>
-                    <td><%=@order.date_end_real%></td>
+                     <td><%=num%></td>
+                     <td><%=a.id%></td>
+                     <td><%=a.name_client%></td>
+                     <td><%=a.project.name%></td>
+                    <% if a.payment_currency == "1" %>
+                     <td><%="#{a.price_project} $"%></td>
+                    <%elsif a.payment_currency == "2" %>
+                     <td><%="#{a.price_project} BS"%></td>
+                    <%end%>
+                     <td><%=a.date_start_real%></td>
+                    <td><%=a.date_end_real%></td>
+                    <td><%=a.stack_state.name%></td>
                   </tr>
                 </tbody>
+                <%end%>
+                <%end%>
             </table>
+            <%end%>
           </div>
-           <div id="box-title-info-item">
-            <span class="info-text">description project</span>
-          </div>
-          <div id="table-project">
-            <table class="table table-bordered">
-                <thead>
-                  <tr>
-                      <th>Activity Number</th>
-                      <th>Project Activity</th>
-                      <th>Cost of Activity</th>
-                      <th>Price of Activity</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% -cantidad = 0 %>
-                  <% @order.project.phases.each do |phase| %>
-                  <% cantidad = cantidad + 1 %>
-                  <tr>
-                    <td><%=cantidad%></td>
-                    <td><%=phase.name%></td>
-                    
-                    <%if @order.payment_currency == "1"%>
-                      <td><%="#{phase.task.cost_dolar} $" %></td>
-                      <td><%="#{phase.task.price_dolar} $" %></td>
-                    <%elsif @order.payment_currency == "2"%>
-                      <td><%="#{phase.task.cost_bolivar} Bs"%></td>
-                      <td><%="#{phase.task.price_bolivar} Bs"%></td>
-                    <%end%>
-                  </tr>
-                  <%end%>      
-                    <td></td>
-                    <td>Total</td>
-          
-                    <%if @order.payment_currency == "1"%>
-                      <td><%="#{@order.cost_project} $" %></td>
-                      <td><%="#{@order.price_project} $" %></td>
-                    <%elsif @order.payment_currency == "2"%>
-                      <td><%="#{@order.cost_project} Bs" %></td>
-                      <td><%="#{@order.price_project} Bs" %></td>
-                    <%end%>
-                  </tr>
-                </tbody>
-            </table>
-          </div>
-          <div id="box-title-info-item">
-            <span class="info-text">Observations</span>
-          </div>
-          <div id="box-observations">
-            <span><%=@order.observation%></span>
-          </div>
+          <div id="box-observations" style="display: none;"></div>
           <div id="box-title-responsable" class="center-flex">
              <span>_____________________________</span><br>
              <span><%="#{@current_user.name} #{@current_user.last_name}"%></span><br>
-             <span>Ordenante</span><br>
-         
              <div id="logo-firm">
-                 <%= wicked_pdf_image_tag 'admin/planner.png'%>
+                <%= wicked_pdf_image_tag 'admin/planner.png'%>
              </div>
           </div>
      </div>
   </div>
 </div>   
-
-
 </body>
 </html>
 <style type="text/css">
@@ -380,6 +355,7 @@
     font-size: 12px;
   }
   .table-bordered > tbody > tr > td{
+    text-align: center !important;
     border: 1px solid black;
     font-size: 8px;
   }
