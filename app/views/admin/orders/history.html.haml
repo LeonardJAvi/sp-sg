@@ -5,7 +5,7 @@
 			= material_icon.md_18.arrow_back.css_class("md-dark")
 			
 		= link_to request.original_url+'.pdf', class: "btn-floating right btn-flat tooltipped", "data-position" => "bottom", "data-tooltip" => t("keppler.actions.back") do
-			= material_icon.md_18.description.css_class("md-dark")	
+			= material_icon.md_18.description.css_class("md-dark")  
 		.card
 			.card-content
 				%ul.list
@@ -40,17 +40,26 @@
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.date_pause")
 						.display-value.fs-body-1.tc-black-2= @order.date_pause.to_s.humanize
 					-# %li.list-row
-					-# 	.display-label= t("activerecord.attributes.#{controller_name.singularize}.state")
-					-# 	.display-value.fs-body-1.tc-black-2= @order.state.to_s.humanize
+					-#  .display-label= t("activerecord.attributes.#{controller_name.singularize}.state")
+					-#  .display-value.fs-body-1.tc-black-2= @order.state.to_s.humanize
 					%li.list-row
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.payment_currency")
-						.display-value.fs-body-1.tc-black-2= @order.payment_currency.to_s.humanize
+						-if @order.payment_currency == "1"
+							-@m = "$"
+						-elsif @order.payment_currency == "2"
+							-@m = "Bs.F"
+
+						.display-value.fs-body-1.tc-black-2= @m.to_s.humanize
 					%li.list-row
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.price_project")
 						.display-value.fs-body-1.tc-black-2= @order.price_project.to_s.humanize
 					%li.list-row
 						.display-label= t("activerecord.attributes.#{controller_name.singularize}.project_id")
-						.display-value.fs-body-1.tc-black-2= @order.project_id.to_s.humanize
+						.display-value.fs-body-1.tc-black-2= @order.project.name.humanize
+
+				
+
+						-# @order.project_id.to_s.humanize
 
 					%table.responsive-table
 						%thead
@@ -68,18 +77,22 @@
 										=cont
 									%td
 										=phase.name
-									-# -if @order.payment_currency == "bolvares"
-										%td
-											
-											=phase.task.cost_bolivar
-										%td
-											=phase.task.price_bolivar
-
-									-if @order.payment_currency == "dolares"
+									-if @order.payment_currency == "1"
 										%td
 											=phase.task.cost_dolar
+									-elsif @order.payment_currency == "2"
+										%td
+											=phase.task.cost_bolivar
+									-if @order.payment_currency == "1"
 										%td
 											=phase.task.price_dolar
+									-elsif @order.payment_currency == "2"
+										%td
+											=phase.task.price_bolivar
+									
+									
+
+									
 									
 
 

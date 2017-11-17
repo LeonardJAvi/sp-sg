@@ -81,12 +81,14 @@ ActiveRecord::Schema.define(version: 20170917202342) do
     t.date     "date_end_planned"
     t.date     "date_end_real"
     t.date     "date_pause"
+    t.date     "date_notification"
     t.string   "state",                 limit: 255
     t.string   "payment_currency",      limit: 255
     t.float    "price_project",         limit: 24
     t.string   "user_responsible",      limit: 255
     t.string   "project_id",            limit: 255
     t.string   "order_id",              limit: 255
+    t.string   "description",           limit: 255
     t.string   "observation",           limit: 255
     t.string   "stack_state_id",        limit: 255
     t.datetime "created_at",                        null: false
@@ -118,6 +120,7 @@ ActiveRecord::Schema.define(version: 20170917202342) do
     t.string   "user_responsible",      limit: 255
     t.string   "project_id",            limit: 255
     t.string   "stack_state_id",        limit: 255
+    t.string   "description",           limit: 255
     t.string   "observation",           limit: 255
     t.float    "cost_project",          limit: 24
     t.string   "person_contact",        limit: 255
@@ -206,13 +209,13 @@ ActiveRecord::Schema.define(version: 20170917202342) do
 
   create_table "tasks", force: :cascade do |t|
     t.float    "number_hours",  limit: 24
-    t.string   "price_bolivar", limit: 255
-    t.string   "price_dolar",   limit: 255
-    t.string   "cost_bolivar",  limit: 255
-    t.string   "cost_dolar",    limit: 255
-    t.string   "phase_id",      limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.float    "price_bolivar", limit: 24
+    t.float    "price_dolar",   limit: 24
+    t.float    "cost_bolivar",  limit: 24
+    t.float    "cost_dolar",    limit: 24
+    t.float    "phase_id",      limit: 24
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "users", force: :cascade do |t|

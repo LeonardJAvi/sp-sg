@@ -9,8 +9,13 @@ module Admin
     before_action :can_multiple_destroy, only: [:destroy_multiple]
 
     def root
-      if current_user
-        redirect_to dashboard_path
+      if current_user.rol == "admin"
+          redirect_to admin_orders_path #nota cuando se defiende la tesis esto pasa al dasboard
+      elsif current_user.rol == "pending"
+          
+        redirect_to app_users_pending_path
+        elsif current_user.rol == "locked"
+          redirect_to app_users_locked_path
       else
         redirect_to new_user_session_path
       end

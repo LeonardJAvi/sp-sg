@@ -24,32 +24,33 @@
                  <span>RIF: J-401904939</span>
             </div>
           </div>
-        </div>
-        <div id="box-title-order">
-          <span id="title-order">Order Service Complete</span>
-        </div>
-        <div id="box-title-info-item">
-          <span class="info-text">Reporte al 10/12/2017</span>
+          <div id="box-title-order">
+              <span id="title-order">Order Service Complete</span>
           </div>
-        <%if $pdf == "1"%>
-            <%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
+          <div id="box-title-info-item">
+              <span class="info-text">Reporte al 10/12/2017</span>
+          </div>
+      </div>
+          <%if $pdf == "1"%>
+              <%if ($parametro.date_start_real.to_s == "") or ($parametro.date_end_real.to_s == "")%>
                   <%$date_start = $parametro.date_start_real = "11/11/1111"%>
                   <%$date_end = $parametro.date_end_real = "11/11/1111"%>
-            <%end%>
-        <div id="table-project">
-          <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>N°</th>
-                    <th>N° Order.</th>
-                    <th>Client</th>
-                    <th>Project</th>
-                    <th>Price</th>
-                    <th>Date start real</th>
-                    <th>Date end real</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
+              <%end%>
+
+          <div id="table-project">
+            <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>N° Order.</th>
+                            <th>Client</th>
+                            <th>Project</th>
+                            <th>Price</th>
+                            <th>Date start real</th>
+                            <th>Date end real</th>
+                            <th>Status</th>
+                       </tr>
+                    </thead>
                  <%num = 0%>
                     <%@orders.each do |order|%>
                      <%num += 1%>
@@ -81,29 +82,29 @@
                           <%end%>
                       <%end%>
                       <%end%>
-                <%unless a == nil%>
-                <tbody>
-                  <tr>
-                     <td><%=num%></td>
-                     <td><%=a.id%></td>
-                     <td><%=a.name_client%></td>
-                     <td><%=a.project.name%></td>
-                    <% if a.payment_currency == "1" %>
-                     <td><%="#{a.price_project} $"%></td>
-                    <%elsif a.payment_currency == "2" %>
-                     <td><%="#{a.price_project} BS"%></td>
+                    <%unless a == nil%>
+                    <tbody>
+                       <tr>
+                          <td><%=num%></td>
+                          <td><%=a.id%></td>
+                          <td><%=a.name_client%></td>
+                          <td><%=a.project.name%></td>
+                          <% if a.payment_currency == "1" %>
+                          <td><%="#{a.price_project} $"%></td>
+                          <%elsif a.payment_currency == "2" %>
+                          <td><%="#{a.price_project} BS"%></td>
+                          <%end%>
+                          <td><%=a.date_start_real%></td>
+                          <td><%=a.date_end_real%></td>
+                          <td><%=a.stack_state.name%></td> 
+                      </tr>
+                    </tbody>
                     <%end%>
-                     <td><%=a.date_start_real%></td>
-                    <td><%=a.date_end_real%></td>
-                    <td><%=a.stack_state.name%></td>
-                  </tr>
-                </tbody>
-                <%end%>
-                <%end%>
-            </table>
-            <%end%>
+                    <%end%>
+              </table>
+              <%end%>
           </div>
-          <div id="box-observations" style="display: none;"></div>
+         <div id="box-observations" style="display: none;"></div>
           <div id="box-title-responsable" class="center-flex">
              <span>_____________________________</span><br>
              <span><%="#{@current_user.name} #{@current_user.last_name}"%></span><br>
@@ -111,11 +112,12 @@
                 <%= wicked_pdf_image_tag 'admin/planner.png'%>
              </div>
           </div>
-     </div>
   </div>
-</div>   
+  </div> 
 </body>
 </html>
+
+
 <style type="text/css">
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -355,7 +357,6 @@
     font-size: 12px;
   }
   .table-bordered > tbody > tr > td{
-    text-align: center !important;
     border: 1px solid black;
     font-size: 8px;
   }

@@ -10,7 +10,7 @@
 # user = CreateAdminService.new.call
 # puts 'CREATED ADMIN USER: ' << user.email
 
-[:admin, :pending, :bloqueado].each do |name|
+[:admin, :pending, :locked].each do |name|
   Role.create name: name
   puts "#{name} has been created"
 end

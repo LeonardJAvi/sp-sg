@@ -6,8 +6,8 @@ class StackState < ActiveRecord::Base
   belongs_to :historyorder
 
   #Field Validation
-  validates :name,presence: { message: "Campos en blanco" }
-  validates :name, uniqueness: { message: "El nombre ya se encuentra registrado" }
+  validates :name, presence: { message: "There are blank fields." }
+  validates :name, uniqueness: { message: "The name is already registered." }
 
   
   # Fields for the search form in the navbar

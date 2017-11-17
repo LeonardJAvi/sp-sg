@@ -31,11 +31,10 @@
 							= f.input :date_notification, as: :string, input_html: {class: "datepicker"}
 							= f.input :person_contact, label: 'Person Contact'
 							= f.input :email_contact, label: 'Phone Contact'
-							= f.input :phone_contact, label: 'Email Contact'
-							= f.input :observation
+							= f.input :phone_contact, label: 'Email Contact', input_html: {type: "number"}
+							= f.input :description
 
-							-unless ((controller_name == "orders") and (action_name =="new"))
-								= f.input :stack_state_id, collection: @stack_states, label: false, value_method: :id, include_blank: 'Select Project', input_html: {class: "browser-default"} 
+							
 							.form-actions.right
 								= f.button :submit, t("keppler.actions.save"), name: '_save'
 								= f.button :submit, t("keppler.actions.save_and_add_another"), name: '_add_other'

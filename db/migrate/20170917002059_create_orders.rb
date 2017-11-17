@@ -16,6 +16,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string :user_responsible
       t.string :project_id
       t.string :stack_state_id
+      t.string :description
       t.string :observation
       t.float :cost_project
       t.string :person_contact

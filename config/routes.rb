@@ -147,6 +147,9 @@ Rails.application.routes.draw do
   post 'admin/orders/project', as: 'orders_project'
   post 'admin/orders/payment_currency', as: 'orders_payment_currency'
 
+  get "users/pending",to:"app/users#pending", as: :app_users_pending
+  get "users/locked",to:"app/users#locked", as: :app_users_locked
+
 
   # resources :tasks
   # post 'admin/tasks/dinamic', as: 'tasks_dinamic'

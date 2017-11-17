@@ -127,9 +127,13 @@ module Admin
         @order.price_project = $total_price_bolivar
         @order.cost_project = $total_cost_bolivar
       end
-      @order.project.phases.each do |phase|
-        if phase.task == nil
-          @order.task = (false)
+      if @order.project != nil
+        if @order.project.phases != []
+          @order.project.phases.each do |phase|
+            if phase.task == nil
+              @order.task = (false)
+            end
+          end
         end
       end
       if @order.save
@@ -143,11 +147,15 @@ module Admin
     def update
       if @order.update(order_params)
         redirect(@order, params)
-        @order.project.phases.each do |phase|
-          if phase.task == nil
-            @order.task = (false)
-          end
-        end
+       if @order.project != nil
+         if @order.project.phases != []
+           @order.project.phases.each do |phase|
+             if phase.task == nil
+               @order.task = (false)
+             end
+           end
+         end
+       end
       else
         render :edit
       end
@@ -186,7 +194,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def order_params
-      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause,:date_notification, :stack_state_id, :payment_currency, :price_project,:cost_project, :observation, :cost_project, :person_contact, :email_contact, :phone_contact,:project_id)
+      params.require(:order).permit(:name_client, :identification_client, :phone_client, :email_client, :date_start_planned, :date_start_real, :date_end_planned, :date_end_real, :date_pause,:date_notification, :stack_state_id, :payment_currency, :price_project,:cost_project,:description, :observation, :cost_project, :person_contact, :email_contact, :phone_contact,:project_id)
     end
 
     def show_history
